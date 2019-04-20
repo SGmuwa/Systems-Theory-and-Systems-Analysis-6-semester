@@ -1,53 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab1
 {
-    class ЗемляИПочва
+    public class ЗемляИПочва
     {
+        public DateTime ДатаПоследнегоИспользования;
+        public long ИндентификаторПоложенияЗемли;
     }
-    abstract class Сотрудник
+    public abstract class Сотрудник
     {
-        class Менеджер : Сотрудник
+        public DateTime ДатаПринятияНаРаботу;
+        public string Имя;
+        public List<Сотрудник> ОтветственныйЗа = new List<Сотрудник>();
+        public long ТелефонСотрудника;
+        public class Менеджер : Сотрудник
+        {
+            public long ТелефонПоКоторомуЗвонятКлиенты;
+        }
+        public class Пахарь : Сотрудник
         {
 
         }
-        class Пахарь : Сотрудник
-        {
-
-        }
-        class Инжерен : Сотрудник
+        public class Инжерен : Сотрудник
         {
 
         }
     }
-    abstract class Рукотворство
+    public abstract class Рукотворство
     {
-        class Здания : Рукотворство
+        public DateTime ДатаИзмененияСостояния;
+        public List<Сотрудник> ИсточникПоследнегоИзменения = new List<Сотрудник>();
+        public double КоличественноеИзменение = 0;
+        public class Здания : Рукотворство
         {
-
+            public string Адрес;
         }
-        class ИнструментыИТехника : Рукотворство
+        public class ИнструментыИТехника : Рукотворство
         {
-
+            public string Производитель;
+            public List<БыстрыеРесурсы> Топливо;
         }
-        abstract class БыстрыеРесурсы : Рукотворство
+        public abstract class БыстрыеРесурсы : Рукотворство
         {
-            class Семена : БыстрыеРесурсы
+            public class Семена : БыстрыеРесурсы
             {
 
             }
-            class Жидкости : БыстрыеРесурсы
+            public class Жидкости : БыстрыеРесурсы
             {
 
             }
         }
     }
-    class КнижкаЗаказов
+    public class КнижкаЗаказов
     {
-
+        public DateTime ДатаДобавления;
+        public List<Сотрудник.Менеджер> КтоДобавил = new List<Сотрудник.Менеджер>();
+        public long ТелефонДляСвязиСКлиентом;
     }
 }
