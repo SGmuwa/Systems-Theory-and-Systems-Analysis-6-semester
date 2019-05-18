@@ -2,33 +2,20 @@
 {
     public class Element
     {
-        int id; //Возможная следующая вершина
-        double veroyatnost; //Вероятность попасть в эту вершину
-
         public Element(int id, double veroyatnost)
         {
-            this.id = id;
-            this.veroyatnost = veroyatnost;
+            Id = id;
+            Veroyatnost = veroyatnost;
         }
 
-        public int getId()
-        {
-            return id;
-        }
+        /// <summary>
+        /// Возможная следующая вершина
+        /// </summary>
+        public int Id { get; set; }
 
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-
-        public double getVeroyatnost()
-        {
-            return veroyatnost;
-        }
-
-        public void setVeroyatnost(double veroyatnost)
-        {
-            this.veroyatnost = veroyatnost;
-        }
+        /// <summary>
+        /// Вероятность попасть в эту вершину
+        /// </summary>
+        public double Veroyatnost { get; set; }
     }
 }
