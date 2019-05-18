@@ -39,28 +39,27 @@ namespace lab3
                     do
                     {
                         tmp_pheromone_concentration = 0;
-                        for (int m = 0; m < v; m++)
+                        for (int i = 0; i < v; i++)
                         {
-                            if (list_cur_path[k].Path.Count == 1 && matrix[xk, m] != double.PositiveInfinity)
+                            if (matrix[xk, i] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(i))
                             {
-                                tmp_pheromone_concentration += (Math.Pow(matrix[xk, m], a)) * (1.0 / Math.Pow(weightMatrix[xk, m], betta));
-                            }
-                            else if (list_cur_path[k].Path.Count > 1 && matrix[xk, m] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(m))
-                            {
-                                tmp_pheromone_concentration += (Math.Pow(matrix[xk, m], a)) * (1.0 / Math.Pow(weightMatrix[xk, m], betta));
+                                tmp_pheromone_concentration += Math.Pow(matrix[xk, i], a) / Math.Pow(weightMatrix[xk, i], betta);
+                                if (tmp_pheromone_concentration == 0)
+                                    tmp_pheromone_concentration = double.Epsilon;
                             }
                         }
                         for (int i = 0; i < v; i++)
                         {
                             if (matrix[xk, i] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(i))
                             {
-                                Pa = ((Math.Pow(matrix[xk, i], a)) * (1.0 / Math.Pow(weightMatrix[xk, i], betta))) / tmp_pheromone_concentration;
+                                Pa = Math.Pow(matrix[xk, i], a) / Math.Pow(weightMatrix[xk, i], betta) / tmp_pheromone_concentration;
                                 Pa *= 100;
-                                listPa.Add(new Element(i, Pa));
+                                if(Pa > 0)
+                                    listPa.Add(new Element(i, Pa));
                             }
                         }
                         if (listPa.Count == 0)
-                        { //Если идти больше некуда. Удаляем весь путь и выходим. И не будем его учитывать
+                        { // Если идти больше некуда. Удаляем весь путь и выходим. И не будем его учитывать
                             list_cur_path[k].Path.Clear();
                             list_cur_path[k].MasVesov.Clear();
                             xk = 4;
@@ -90,9 +89,9 @@ namespace lab3
                             }
                         }
                         if (listPa.Count != 0) listPa.Clear();
-                    } while (xk != 4);//Пока конечная вершина не достигнута
+                    } while (xk != 4); // Пока конечная вершина не достигнута
                     int j = 0;
-                    Console.Write("Ant " + list_cur_path[k].IdAnt + "  path: " + "\t");
+                    Console.Write("Муравей " + list_cur_path[k].IdAnt + " путь: " + "\t");
                     while (j < list_cur_path[k].Path.Count)
                     {
                         if (list_cur_path[k].Path.Count != 0)
@@ -102,7 +101,7 @@ namespace lab3
                 }
 
 
-                //Испарение феромона
+                // Испарение феромона
                 for (int i = 0; i < v; i++)
                     for (int j = 0; j < v; j++)
                         if (matrix[i, j] != double.PositiveInfinity)
@@ -113,17 +112,17 @@ namespace lab3
 
 
 
-                //Увеличиваем концентрацию феромонов
-                for (int k = 0; k < nk; k++)//Для каждого муравья
+                // Увеличиваем концентрацию феромонов
+                for (int k = 0; k < nk; k++) // Для каждого муравья
                 {
                     if (list_cur_path[k].Path.Count != 0)
-                    {//Если путь муравья не пуст, то считаем, сколько надо добавить феромонов
+                    { // Если путь муравья не пуст, то считаем, сколько надо добавить феромонов
 
                         double tempVesPath = 0;
-                        for (int i = 0; i < list_cur_path[k].MasVesov.Count; i++) // Идем по пути муравья и складываем веса всех дуг пути
+                        for (int i = 0; i < list_cur_path[k].MasVesov.Count; i++) // Идём по пути муравья и складываем веса всех дуг пути
                             tempVesPath += list_cur_path[k].MasVesov[i];
 
-                        double countPheromone = (double)1.0 / tempVesPath;
+                        double countPheromone = 1.0 / tempVesPath;
 
                         int[] tmpMasVertix = new int[list_cur_path[k].Path.Count];
                         for (int i = 0; i < tmpMasVertix.Length; i++)
@@ -152,13 +151,10 @@ namespace lab3
         }
 
         private static void Init(List<CurrentPath> list_cur_path)
-        {//Создается 10 муравьев
+        { // Создаётся 20 муравьёв
             for(int i = 0; i < 20; i++)
             {
-                CurrentPath path = new CurrentPath();
-                path.IdAnt = i;
-                path.Path = new List<int>();
-                path.MasVesov = new List<double>();
+                CurrentPath path = new CurrentPath(i);
                 list_cur_path.Add(path);
             }
         }
@@ -177,11 +173,7 @@ namespace lab3
                         matrix[i, j] = 2.0;
                         matrix[j, i] = 2.0;
                     }
-
-            Console.WriteLine("Матрица Феромонов на дугах:");
-            for (int i = 0; i < v; i++)
-                for (int j = 0; j < v; j++)
-                    if (matrix[i, j] == 0.0) matrix[i, j] = double.PositiveInfinity;
+            
             for (int i = 0; i < v; i++)
             {
                 for (int j = 0; j < v; j++)
