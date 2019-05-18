@@ -99,8 +99,7 @@ namespace lab3
                     }
                     Console.WriteLine();
                 }
-
-
+                
                 // Испарение феромона
                 for (int i = 0; i < v; i++)
                     for (int j = 0; j < v; j++)
@@ -109,9 +108,7 @@ namespace lab3
                             double tmp = matrix[i, j];
                             matrix[i, j] = (1.0 - p) * tmp;
                         }
-
-
-
+                
                 // Увеличиваем концентрацию феромонов
                 for (int k = 0; k < nk; k++) // Для каждого муравья
                 {
@@ -145,8 +142,8 @@ namespace lab3
                     if (list_cur_path[i].MasVesov.Count != 0)
                         list_cur_path[i].MasVesov.Clear();
                 }
-                Console.WriteLine("t+1: " + t + "\n");
-            } while (t < 20);
+                Console.WriteLine("Шаг: " + t + "\n");
+            } while (t < 40);
             Console.ReadKey();
         }
 
@@ -189,34 +186,19 @@ namespace lab3
         /// <summary>
         /// Создание графа переходов.
         /// </summary>
-        /// <param name="output">Матрица веосв.</param>
         /// <returns>Возвращает матрицу весов.</returns>
         private static double[,] InitWeightMatrix()
         {
-            double inf = double.PositiveInfinity;
+            double i = double.PositiveInfinity;
             double[,] output = new double[7, 7] {
-                { inf, inf, inf, inf, inf, inf, inf },
-                { inf, inf, inf, inf, inf, inf, inf },
-                { inf, inf, inf, inf, inf, inf, inf },
-                { inf, inf, inf, inf, inf, inf, inf },
-                { inf, inf, inf, inf, inf, inf, inf },
-                { inf, inf, inf, inf, inf, inf, inf },
-                { inf, inf, inf, inf, inf, inf, inf }
+                { 0,  16, i,  8,  i,  20, i },
+                { 16, 0,  2,  10, i,  i,  i },
+                { i,  2,  0,  40, 7,  i,  i },
+                { 8,  10, 40, 0,  50, 20, 15 },
+                { i,  i,  7,  50, 0,  i,  2 },
+                { 20, i,  i,  20, i,  0,  5 },
+                { i,  i,  i,  15, 2,  5,  0 }
             };
-            for (int i = 0; i < output.GetLength(0); i++)
-                for (int j = 0; j < output.GetLength(1); j++)
-                    if (i == 0 && j == 1) output[i, j] = output[j, i] = 16.0;
-                    else if (i == 0 && j == 3) output[i, j] = output[j, i] = 8.0;
-                    else if (i == 0 && j == 5) output[i, j] = output[j, i] = 20.0;
-                    else if (i == 1 && j == 2) output[i, j] = output[j, i] = 2.0;
-                    else if (i == 1 && j == 3) output[i, j] = output[j, i] = 10.0;
-                    else if (i == 2 && j == 4) output[i, j] = output[j, i] = 7.0;
-                    else if (i == 2 && j == 3) output[i, j] = output[j, i] = 40.0;
-                    else if (i == 3 && j == 4) output[i, j] = output[j, i] = 50.0;
-                    else if (i == 3 && j == 5) output[i, j] = output[j, i] = 20.0;
-                    else if (i == 3 && j == 6) output[i, j] = output[j, i] = 15.0;
-                    else if (i == 4 && j == 6) output[i, j] = output[j, i] = 2.0;
-                    else if (i == 5 && j == 6) output[i, j] = output[j, i] = 5.0;
             return output;
         }
     }
