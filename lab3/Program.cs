@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace lab3
 {
@@ -12,47 +13,44 @@ namespace lab3
         {
             //Берётся максимальная вероятность, что не правильно
             //Все равно отстой без веса ребер
-            int nk = 20;
-            int t = 0;
-            int v = 7;
-            double Pa;
-            double p = 0.2;//Скорость испарения феромона
-            double a = 1.0;
+            int t = 0; // Количество итераций
+            double p = 0.2; //Скорость испарения феромона
+            const double a = 1.0;
             double betta = 1.0;
             int xk;//Выбранная вершина
-            double[,] matrix = new double[v, v];
-            double[,] weightMatrix = new double[v, v];
+            double[,] pheromones;
+            double[,] weights;
             List<CurrentPath> list_cur_path = new List<CurrentPath>();
             Random ran = new Random();
-            Init(list_cur_path);
-            InitMatrix(matrix, v);
-            weightMatrix = InitWeightMatrix();
+            InitPaths(list_cur_path);
+            pheromones = InitMatrix();
+            weights = InitWeightMatrix();
             double tmp_pheromone_concentration;
             List<Element> listPa = new List<Element>(); // Лист вероятностей попадания в вершину id
 
             do
             {
-                for (int k = 0; k < nk; k++)
+                for (int k = 0; k < list_cur_path.Count; k++)
                 {//Построение пути для каждого муравья
                     xk = 0;
                     list_cur_path[k].Path.Add(xk);
                     do
                     {
                         tmp_pheromone_concentration = 0;
-                        for (int i = 0; i < v; i++)
+                        for (int i = 0; i < pheromones.GetLength(1); i++)
                         {
-                            if (matrix[xk, i] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(i))
+                            if (pheromones[xk, i] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(i))
                             {
-                                tmp_pheromone_concentration += Math.Pow(matrix[xk, i], a) / Math.Pow(weightMatrix[xk, i], betta);
+                                tmp_pheromone_concentration += Math.Pow(pheromones[xk, i], a) / Math.Pow(weights[xk, i], betta);
                                 if (tmp_pheromone_concentration == 0)
                                     tmp_pheromone_concentration = double.Epsilon;
                             }
                         }
-                        for (int i = 0; i < v; i++)
+                        for (int i = 0; i < pheromones.GetLength(1); i++)
                         {
-                            if (matrix[xk, i] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(i))
+                            if (pheromones[xk, i] != double.PositiveInfinity && !list_cur_path[k].Path.Contains(i))
                             {
-                                Pa = Math.Pow(matrix[xk, i], a) / Math.Pow(weightMatrix[xk, i], betta) / tmp_pheromone_concentration;
+                                double Pa = Math.Pow(pheromones[xk, i], a) / Math.Pow(weights[xk, i], betta) / tmp_pheromone_concentration;
                                 Pa *= 100;
                                 if(Pa > 0)
                                     listPa.Add(new Element(i, Pa));
@@ -81,7 +79,7 @@ namespace lab3
                             {
                                 if (temMas[i] < tempRandom && temMas[i + 1] > tempRandom)
                                 {
-                                    list_cur_path[k].MasVesov.Add(weightMatrix[xk, listPa[i].Id]);
+                                    list_cur_path[k].MasVesov.Add(weights[xk, listPa[i].Id]);
                                     xk = listPa[i].Id;
                                     list_cur_path[k].Path.Add(xk);
                                     i = temMas.Length - 1;
@@ -99,18 +97,19 @@ namespace lab3
                     }
                     Console.WriteLine();
                 }
-                
+
                 // Испарение феромона
-                for (int i = 0; i < v; i++)
-                    for (int j = 0; j < v; j++)
-                        if (matrix[i, j] != double.PositiveInfinity)
+                Parallel.For(0, pheromones.GetLength(0), (int i) =>
+                {
+                    Parallel.For(0, pheromones.GetLength(1), (int j) =>
                         {
-                            double tmp = matrix[i, j];
-                            matrix[i, j] = (1.0 - p) * tmp;
-                        }
+                            double tmp = pheromones[i, j];
+                            pheromones[i, j] = (1.0 - p) * tmp;
+                        });
+                });
                 
                 // Увеличиваем концентрацию феромонов
-                for (int k = 0; k < nk; k++) // Для каждого муравья
+                for (int k = 0; k < list_cur_path.Count; k++) // Для каждого муравья
                 {
                     if (list_cur_path[k].Path.Count != 0)
                     { // Если путь муравья не пуст, то считаем, сколько надо добавить феромонов
@@ -128,8 +127,8 @@ namespace lab3
                         {
                             int output = tmpMasVertix[i];
                             int input = tmpMasVertix[i + 1];
-                            matrix[output, input] += countPheromone;
-                            if (output != input) matrix[input, output] += countPheromone;
+                            pheromones[output, input] += countPheromone;
+                            if (output != input) pheromones[input, output] += countPheromone;
                         }
                     }
                 }
@@ -142,45 +141,64 @@ namespace lab3
                     if (list_cur_path[i].MasVesov.Count != 0)
                         list_cur_path[i].MasVesov.Clear();
                 }
+                WriteMatrix(pheromones);
                 Console.WriteLine("Шаг: " + t + "\n");
-            } while (t < 40);
+            } while (ConsoleGetBool("Сделать ещё одну итерацию?"));
             Console.ReadKey();
         }
 
-        private static void Init(List<CurrentPath> list_cur_path)
-        { // Создаётся 20 муравьёв
-            for(int i = 0; i < 20; i++)
+        private static bool ConsoleGetBool(string message)
+        {
+            string line;
+            while(true)
             {
-                CurrentPath path = new CurrentPath(i);
-                list_cur_path.Add(path);
+                Console.Write(message + "\ny - yes, n - no.");
+                line = Console.ReadLine();
+                if (line.Length != 1)
+                    continue;
+                else if (line == "y")
+                    return true;
+                else if (line == "n")
+                    return false;
+                continue;
             }
         }
 
-        private static void InitMatrix(double[,] matrix, int v)
+        private static void InitPaths(List<CurrentPath> list_cur_path)
+        { // Создаётся 20 муравьёв
+            for(int i = 0; i < 20; i++)
+                list_cur_path.Add(new CurrentPath(i));
+        }
+
+        /// <summary>
+        /// Иницциализация матриццы ферамонов.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="v"></param>
+        private static double[,] InitMatrix()
         {
-            for (int i = 0; i < v; i++)
-                for (int j = 0; j < v; j++)
-                    if ((i == 0 && j == 3) || (i == 0 && j == 5) || (i == 0 && j == 1) ||
-                            (i == 1 && j == 2) || (i == 1 && j == 3) ||
-                            (i == 2 && j == 4) || (i == 2 && j == 3) ||
-                            (i == 3 && j == 4) || (i == 3 && j == 5) || (i == 3 && j == 6) ||
-                            (i == 4 && j == 6) ||
-                            (i == 5 && j == 6))
-                    {
-                        matrix[i, j] = 2.0;
-                        matrix[j, i] = 2.0;
-                    }
-            
-            for (int i = 0; i < v; i++)
+            return new double[7, 7] {
+                { 0, 2, 0, 2, 0, 5, 0 },
+                { 0, 0, 2, 2, 0, 0, 0 },
+                { 0, 0, 0, 2, 2, 0, 0 },
+                { 0, 0, 0, 0, 2, 2, 2 },
+                { 0, 0, 0, 0, 0, 0, 2 },
+                { 0, 0, 0, 0, 0, 0, 2 },
+                { 0, 0, 0, 0, 0, 0, 0 }
+            };
+        }
+
+        private static void WriteMatrix(double[,] Matrix)
+        {
+            for (int i = 0; i < Matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < v; j++)
+                for (int j = 0; j < Matrix.GetLength(1); j++)
                 {
-                    Console.Write(matrix[i, j] + "\t");
+                    Console.Write(Matrix[i, j].ToString("N1") + "\t");
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
-
         }
 
         /// <summary>
