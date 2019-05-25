@@ -53,6 +53,6 @@ namespace lab4
         }
 
         public override string ToString()
-            => string.Format("({0, 3}, {1, 3}) = {2}", X, Y, ValueFunc);
+            => $"({X, 3}, {Y, 3}) = {ValueFunc}";
     }
 }
