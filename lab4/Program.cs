@@ -109,7 +109,7 @@ namespace lab4
                 if (listOptionArea[i].PointCountBest != -1)
                     listBee.Add(listOptionArea[i]);
             }
-            Console.WriteLine("\n" + "NEW listBee");
+            Console.WriteLine("\nNEW listBee");
             for (int i = 0; i < listBee.Count; i++)
             {
                 Console.WriteLine(listBee[i].X + "  " + listBee[i].Y + "  " + listBee[i].ValueFunc + "   " + listBee[i].PointCountBest);
@@ -122,7 +122,7 @@ namespace lab4
             {
                 int centerX = listBee[i].X;
                 int centerY = listBee[i].Y;
-                Console.WriteLine("\n" + "Область: " + i);
+                Console.WriteLine($"\n------------------------------\nОбласть: {i}");
                 do
                 {
                     List<Bee> listN = new List<Bee> // Пчёлы, посылаемые в область
@@ -193,20 +193,23 @@ namespace lab4
             //Сортировка списка для поиска лучших точек
             listRes.Sort();
             listRes.Reverse();
-            Console.WriteLine("\n" + "Варианты: ");
+            Console.WriteLine("\nВарианты: ");
             for (int i = 0; i < listRes.Count; i++)
             {
                 Console.WriteLine(listRes[i].ToString());
             }
-            Console.WriteLine("\n" + "Лучший вариант: ");
+            Console.WriteLine("\nЛучший вариант: ");
             Console.WriteLine(listRes[0].ToString());
             Console.ReadLine();
         }
         private static void WriteList(IEnumerable list)
         {
             Console.WriteLine();
+            ConsoleColor old = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             foreach (object b in list)
                 Console.WriteLine(b.ToString());
+            Console.ForegroundColor = old;
         }
     }
 }
