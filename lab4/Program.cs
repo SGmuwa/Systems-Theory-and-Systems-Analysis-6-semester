@@ -167,8 +167,8 @@ namespace lab4
                     }
 
                     // Сортировка списка для поиска лучших точек
-                    listN.Sort();
-                    listN.Reverse();
+                    listN.Sort((a, b) => -1*a.CompareTo(b));
+
                     WriteList(listN);
                     bool ch = false;
                     for (int j = 0; j < TEM_CHEACK.Count; j++)
@@ -206,8 +206,8 @@ namespace lab4
                 listRes[i].ValueFunc = listRes[i].AmountNectar();
             }
             // Сортировка списка для поиска лучших точек
-            listRes.Sort();
-            listRes.Reverse();
+            listRes.Sort((a, b) => -1 * a.CompareTo(b));
+
             Console.WriteLine("\nВарианты: ");
             for (int i = 0; i < listRes.Count; i++)
             {
