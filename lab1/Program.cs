@@ -34,32 +34,18 @@ namespace lab1
 
             Type[] types = new Type[] { typeof(ЗемляИПочва), typeof(Сотрудник.Менеджер), typeof(Сотрудник.Инжерен), typeof(Сотрудник.Пахарь), typeof(Рукотворство.Здания) };
 
-            Console.WriteLine(list.ToJSON(types));
+            list.WriteAllLine();
 
             ushort indexNeed;
             do
             {
                 Console.WriteLine("Кто вам нужен?");
-                types.WriteAllLine();
+                types.WriteAll();
             } while (!ushort.TryParse(Console.ReadLine(), out indexNeed) || indexNeed >= types.Length);
-            Console.WriteLine(list.FindAllClasses(types[indexNeed]).ToJSON(types));
 
             Console.ReadLine();
         }
-
-
-        public static string ToJSON(this object toWrite, IEnumerable<Type> types)
-        {
-            MemoryStream strm = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(toWrite.GetType(), new DataContractJsonSerializerSettings()
-            {
-                KnownTypes = types,
-                DateTimeFormat = new DateTimeFormat("dd.MM.yyyy hh:mm:ss")
-            });
-            ser.WriteObject(strm, toWrite);
-            strm.Position = 0;
-            return new StreamReader(strm).ReadToEnd();
-        }
+        
 
         public static List<T> FindAllClasses<T>(this IEnumerable<T> list, Type search)
         {
@@ -77,20 +63,23 @@ namespace lab1
             return ((SEARCH)list.Find((T o) => o is SEARCH && match.Invoke((SEARCH)o)));
         }
 
-        public static void WriteAllLine<T>(this IEnumerable<T> values)
-            => Console.WriteLine(values.ToStringAll());
+        public static void WriteAll<T>(this IEnumerable<T> values)
+            => Console.WriteLine(values.ToStringAll(", "));
 
-        public static string ToStringAll<T>(this IEnumerable<T> values)
+        public static void WriteAllLine<T>(this IEnumerable<T> values)
+            => Console.WriteLine(values.ToStringAll("\n"));
+
+        public static string ToStringAll<T>(this IEnumerable<T> values, string separator = ", ")
         {
             StringBuilder sb = new StringBuilder();
             IEnumerator<T> en = values.GetEnumerator();
             foreach(T v in values)
             {
                 sb.Append(v);
-                sb.Append(", ");
+                sb.Append(separator);
             }
-            if (sb.Length > 1)
-                sb.Length -= 2;
+            if (sb.Length >= separator.Length)
+                sb.Length -= separator.Length;
             return sb.ToString();
         }
     }

@@ -173,8 +173,6 @@ namespace lab3
         /// <summary>
         /// Иницциализация матриццы ферамонов.
         /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="v"></param>
         private static double[,] InitMatrix()
         {
             return new double[7, 7] {

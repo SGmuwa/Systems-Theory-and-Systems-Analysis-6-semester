@@ -1,91 +1,135 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using static lab1.Controller;
 
 namespace lab1
 {
-    [DataContract]
+    public static class Controller
+    {
+        public static int deep = 3;
+
+        public static string ToStringSafeDeep(Func<string> toString)
+        {
+            string output;
+            if (--deep >= 0)
+                output = toString();
+            else
+                output = " ... ";
+            deep++;
+            return output;
+        }
+    }
+
     public class ЗемляИПочва
     {
-        [DataMember]
+        
         public DateTime ДатаПоследнегоИспользования;
-        [DataMember]
+        
         public long ИндентификаторПоложенияЗемли;
+
+        public override string ToString()
+            => ToStringSafeDeep(() => $"{typeof(ЗемляИПочва)} ДатаПоследнегоИспользования: {ДатаПоследнегоИспользования}, ИндентификаторПоложенияЗемли: {ИндентификаторПоложенияЗемли}");
+
+        public static ClassWithComparablesFields GetFields
+            => new ClassWithComparablesFields(
+                  new ParserWithIComparable((str) => DateTime.Parse(str), DateTime.Now, "ДатаПоследнегоИспользования")
+                  );
     }
-    [DataContract]
+    
     public abstract class Сотрудник
     {
-        [DataMember]
+        
         public DateTime ДатаПринятияНаРаботу;
-        [DataMember]
+        
         public string Имя;
-        [DataMember]
+        
         public List<object> ОтветственныйЗа = new List<object>();
-        [DataMember]
+        
         public long ТелефонСотрудника;
-        [DataContract]
+
+
+        public override string ToString()
+            => ToStringSafeDeep(() => $"{typeof(Сотрудник)} ДатаПринятияНаРаботу: {ДатаПринятияНаРаботу}, Имя: {Имя}, ОтветственныйЗа: [{ОтветственныйЗа.ToStringAll()}], ТелефонСотрудника: {ТелефонСотрудника}");
+
         public class Менеджер : Сотрудник
         {
-            [DataMember]
             public long ТелефонПоКоторомуЗвонятКлиенты;
+
+            public override string ToString()
+                => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(Менеджер)}, ТелефонПоКоторомуЗвонятКлиенты: {ТелефонПоКоторомуЗвонятКлиенты}");
         }
-        [DataContract]
+        
         public class Пахарь : Сотрудник
         {
-
+            public override string ToString()
+                => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(Пахарь)}");
         }
-        [DataContract]
+        
         public class Инжерен : Сотрудник
         {
-
+            public override string ToString()
+                => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(Инжерен)}");
         }
     }
-    [DataContract]
+    
     public abstract class Рукотворство
     {
-        [DataMember]
+        
         public DateTime ДатаИзмененияСостояния;
-        [DataMember]
+        
         public List<Сотрудник> ИсточникПоследнегоИзменения = new List<Сотрудник>();
-        [DataMember]
+        
         public double КоличественноеИзменение = 0;
-        [DataContract]
+
+        public override string ToString()
+            => ToStringSafeDeep(() => $"{base.ToString()}, ДатаИзмененияСостояния: {ДатаИзмененияСостояния}, ИсточникПоследнегоИзменения: [{ИсточникПоследнегоИзменения.ToStringAll(", ")}], КоличественноеИзменение: {КоличественноеИзменение}");
+
         public class Здания : Рукотворство
         {
-            [DataMember]
             public string Адрес;
+
+            public override string ToString()
+                => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(Здания)}, Адрес: {Адрес}");
         }
-        [DataContract]
+        
         public class ИнструментыИТехника : Рукотворство
         {
-            [DataMember]
+            
             public string Производитель;
-            [DataMember]
+            
             public List<БыстрыеРесурсы> Топливо;
+
+            public override string ToString()
+                => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(ИнструментыИТехника)}, Производитель: {Производитель}, Топливо: [{Топливо.ToStringAll(", ")}]");
         }
-        [DataContract]
+        
         public abstract class БыстрыеРесурсы : Рукотворство
         {
-            [DataContract]
+            
             public class Семена : БыстрыеРесурсы
             {
-
+                public override string ToString()
+                    => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(Семена)}");
             }
-            [DataContract]
+            
             public class Жидкости : БыстрыеРесурсы
             {
-
+                public override string ToString()
+                    => ToStringSafeDeep(() => $"{base.ToString()}, {typeof(Жидкости)}");
             }
         }
     }
-    [DataContract]
+    
     public class КнижкаЗаказов
     {
-        [DataMember]
+        
         public DateTime ДатаДобавления;
-        [DataMember]
+        
         public List<Сотрудник.Менеджер> КтоДобавил = new List<Сотрудник.Менеджер>();
-        [DataMember]
+        
         public long ТелефонДляСвязиСКлиентом;
+
+        public override string ToString()
+            => ToStringSafeDeep(() => $"{base.ToString()}, ДатаДобавления: {ДатаДобавления}, КтоДобавил: [{КтоДобавил.ToStringAll(", ")}], ТелефонДляСвязиСКлиентом: {ТелефонДляСвязиСКлиентом}");
     }
 }
