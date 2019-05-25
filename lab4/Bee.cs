@@ -18,18 +18,18 @@ namespace lab4
 
         public double ValueFunc { get; set; }
 
-        public Bee(int X, int Y)
+        public Bee(int X, int Y, int pointCountBest = 0, double valueFunc = 0)
         {
             this.X = X;
             this.Y = Y;
+            PointCountBest = pointCountBest;
+            ValueFunc = valueFunc;
         }
 
-        public double amount_nectar()
-        {
-            return -(Math.Pow(X, 2) + Math.Pow(Y, 2));
-            //return Math.sin(x)*y *Math.sin(y);
-        }
-        public double distance(int a, int b)
+        public double AmountNectar()
+            => -(Math.Pow(X, 2) + Math.Pow(Y, 2));
+
+        public double Distance(int a, int b)
         {//Евклидово расстояние между точкой Y(x,y) и Y(a,b) 
             return Math.Sqrt(Math.Pow(X - a, 2) + Math.Pow(Y - b, 2));
         }
@@ -51,5 +51,8 @@ namespace lab4
             else
                 return CompareTo((Bee)obj);
         }
+
+        public override string ToString()
+            => "X: " + X + ", Y: " + Y + ", F: " + ValueFunc;
     }
 }
