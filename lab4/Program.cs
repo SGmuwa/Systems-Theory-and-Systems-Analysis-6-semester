@@ -12,34 +12,52 @@ namespace lab4
         //Алгоритм для нескольких экстремумов
         //Области рассматриваются поочерёдно, пока не выпадет максимальная точка определённое количество раз подряд
         static readonly Random random = new Random();
-        const double EVKLID_DISTANCE = 2; // Минимальное растояние между разведчиками
-        static int break_parameter = 5;
+        /// <summary>
+        /// Минимальное растояние между разведчиками.
+        /// </summary>
+        const double EVKLID_DISTANCE = 2;
+        const int break_parameter = 5;
 
-        //Про пчёл
-        static int scoutCount = 10;//Колличество пчёл разведчиков
-        static int beeCont_toBest = 5;//Колличество пчёл, отправляемых на лучшие участки
+        // Про пчёл
+
+        /// <summary>
+        /// Колличество пчёл разведчиков.
+        /// </summary>
+        const int scoutCount = 10;
+        /// <summary>
+        /// Колличество пчёл, отправляемых на лучшие участки.
+        /// </summary>
+        const int beeCont_toBest = 5;
 
 
         //Про области
-        static int bestAreasCount = 2;//Колличество лучших участков
-        static int selectedAreasCount = 3;//Колличество выбранных участков
-        static int areaSize = 5; // Размер области для каждого участка
+        /// <summary>
+        /// Колличество лучших участков.
+        /// </summary>
+        const int bestAreasCount = 2;
+        /// <summary>
+        /// Колличество выбранных участков.
+        /// </summary>
+        const int selectedAreasCount = 3;
+        /// <summary>
+        /// Размер области для каждого участка.
+        /// </summary>
+        const int areaSize = 5;
 
         //Границы поиска
         //Область D
-        static int StartX = -100;
-        static int StopX = 100;
-        static int StartY = -100;
-        static int StopY = 100;
+        const int StartX = -100;
+        const int StopX = 100;
+        const int StartY = -100;
+        const int StopY = 100;
+
         static List<Bee> TEM_CHEACK = new List<Bee>();
         static int tem_ch_count = 0;
         static readonly List<Bee> RES = new List<Bee>();
         public static void Main(string[] args)
         {
-
-
             List<Bee> listBee = new List<Bee>();//Точки разведчиков
-                                                //Генерация случайных точек в области D, куда отправляются пчёлы - разведчики
+            //Генерация случайных точек в области D, куда отправляются пчёлы - разведчики.
             for (int i = 0; i < scoutCount; i++)
             {
                 listBee.Add(new Bee(random.Next(StopX) + StartX, random.Next(StopY) + StartY));
@@ -57,8 +75,8 @@ namespace lab4
 
 
             //Списки хранят лучшие точки и выбранные соответственно
-            List<Bee> listBestArea = new List<Bee>();//Список лучших точек (первая подобласть)
-            List<Bee> listOptionArea = new List<Bee>();//Список остальных точек (вторая подобласть)
+            List<Bee> listBestArea = new List<Bee>(); // Список лучших точек (первая подобласть)
+            List<Bee> listOptionArea = new List<Bee>(); // Список остальных точек (вторая подобласть)
             for (int i = 0; i < bestAreasCount; i++)
             {
                 listBestArea.Add(new Bee(listBee[i].X, listBee[i].Y));
@@ -117,7 +135,7 @@ namespace lab4
 
             List<Bee> listRes = new List<Bee>();
 
-            //Рассматриваем области
+            // Рассматриваем области
             for (int i = 0; i < listBee.Count; i++)
             {
                 int centerX = listBee[i].X;
@@ -144,14 +162,14 @@ namespace lab4
                     int upper_coordY = centerY + areaSize;
                     
                     for (int j = 1; j < tempCountN + 1; j++)
-                    { //Генерируем точки в области в колличестве пчёл, посылыемых в область
+                    { // Генерируем точки в области в колличестве пчёл, посылыемых в область
                         int x = random.Next(upper_coordX - lower_coordX + 1) + lower_coordX;
                         int y = random.Next(upper_coordY - lower_coordY + 1) + lower_coordY;
                         listN.Add(new Bee(x, y, 0));
                         listN[j].ValueFunc = listN[j].AmountNectar();
                     }
 
-                    //Сортировка списка для поиска лучших точек
+                    // Сортировка списка для поиска лучших точек
                     listN.Sort();
                     listN.Reverse();
                     WriteList(listN);
@@ -190,7 +208,7 @@ namespace lab4
             {
                 listRes[i].ValueFunc = listRes[i].AmountNectar();
             }
-            //Сортировка списка для поиска лучших точек
+            // Сортировка списка для поиска лучших точек
             listRes.Sort();
             listRes.Reverse();
             Console.WriteLine("\nВарианты: ");
@@ -202,6 +220,7 @@ namespace lab4
             Console.WriteLine(listRes[0].ToString());
             Console.ReadLine();
         }
+
         private static void WriteList(IEnumerable list)
         {
             Console.WriteLine();

@@ -12,7 +12,7 @@ namespace lab4
         public int Y { get; set; }
 
         /// <summary>
-        /// Определяет сколько туда пчёл в дальнейшем послать
+        /// Определяет сколько туда пчёл в дальнейшем послать.
         /// </summary>
         public int PointCountBest { get; set; }
 
@@ -29,11 +29,13 @@ namespace lab4
         public double AmountNectar()
             => -(Math.Pow(X, 2) + Math.Pow(Y, 2));
 
+        /// <summary>
+        /// Евклидово расстояние между точкой Y(x,y) и Y(a,b).
+        /// </summary>
         public double Distance(int a, int b)
-        {//Евклидово расстояние между точкой Y(x,y) и Y(a,b) 
+        { 
             return Math.Sqrt(Math.Pow(X - a, 2) + Math.Pow(Y - b, 2));
         }
-
 
         public int CompareTo(Bee other)
         {
