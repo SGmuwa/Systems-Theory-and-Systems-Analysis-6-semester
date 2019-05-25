@@ -11,7 +11,7 @@ namespace lab4
         //Алгоритм для нескольких экстремумов
         //Области рассматриваются поочерёдно, пока не выпадет максимальная точка определённое количество раз подряд
         static Random random = new Random();
-        static final double EVKLID_DISTANCE = 2;//минимальное растояние между разведчиками
+        const double EVKLID_DISTANCE = 2; //минимальное растояние между разведчиками
         static int break_parameter = 5;
         //Про пчёл
         static int scoutCount = 10;//Колличество пчёл разведчиков
@@ -30,188 +30,184 @@ namespace lab4
         static int stopX = 100;
         static int startY = -100;
         static int stopY = 100;
-        static List<Bee> TEM_CHEACK = new ArrayList<>();
+        static List<Bee> TEM_CHEACK = new List<Bee>();
         static int tem_ch_count = 0;
-        static List<Bee> RES = new ArrayList<>();
-        public static void main(String[] args)
+        static List<Bee> RES = new List<Bee>();
+        public static void Main(string[] args)
         {
 
 
-            List<Bee> listBee = new ArrayList<>();//Точки разведчиков
-                                                  //Генерация случайных точек в области D, куда отправляются пчёлы - разведчики
+            List<Bee> listBee = new List<Bee>();//Точки разведчиков
+                                                //Генерация случайных точек в области D, куда отправляются пчёлы - разведчики
             for (int i = 0; i < scoutCount; i++)
             {
-                listBee.add(new Bee(random.nextInt(stopX) + startX, random.nextInt(stopY) + startY));
-                double valFunc = listBee.get(i).amount_nectar();
-                listBee.get(i).setValueFunc(valFunc);
-                listBee.get(i).setPointCountBest(0);
+                listBee.Add(new Bee(random.Next(stopX) + startX, random.Next(stopY) + startY));
+                double valFunc = listBee[i].amount_nectar();
+                listBee[i].ValueFunc = valFunc;
+                listBee[i].PointCountBest = 0;
             }
 
-            //Сортировка списка для поиска лучших точек
-            listBee.sort(new Comparator<Bee>() {
-            @Override
-            public int compare(Bee o1, Bee o2)
+            // Сортировка списка для поиска лучших точек
+            listBee.Sort();
+            listBee.Reverse();
+
+            for (int i = 0; i < scoutCount; i++)
+                Console.WriteLine(listBee[i].X + "  " + listBee[i].Y + "  " + listBee[i].ValueFunc);
+
+
+            //Списки хранят лучшие точки и выбранные соответственно
+            List<Bee> listBestArea = new List<Bee>();//Список лучших точек (первая подобласть)
+            List<Bee> listOptionArea = new List<Bee>();//Список остальных точек (вторая подобласть)
+            for (int i = 0; i < bestAreasCount; i++)
             {
-                if (o1.getValueFunc() == o2.getValueFunc()) return 0;
-                else if (o1.getValueFunc() < o2.getValueFunc()) return 1;
-                else return -1;
+                listBestArea.Add(new Bee(listBee[i].X, listBee[i].Y));
             }
-        });
+            for (int i = bestAreasCount; i < bestAreasCount + selectedAreasCount; i++)
+            {
+                listOptionArea.Add(new Bee(listBee[i].X, listBee[i].Y));
+            }
+            for (int i = 0; i < listBestArea.Count; i++)
+            {
+                listBestArea[i].ValueFunc = listBestArea[i].amount_nectar();
+                listBestArea[i].PointCountBest = 0;
+            }
+            for (int i = 0; i < listOptionArea.Count; i++)
+            {
+                listOptionArea[i].ValueFunc = listOptionArea[i].amount_nectar();
+                listOptionArea[i].PointCountBest = 0;
+            }
 
-        for (int i = 0; i<scoutCount; i++){
-            System.out.println(listBee.get(i).x+"  "+listBee.get(i).y+"  "+listBee.get(i).valueFunc);
+            //Считаем евклидово расстояние между точками с наибольшим значением функции и другими точками
+            for (int i = 0; i < listBestArea.Count; i++)
+                for (int j = 0; j < listOptionArea.Count; j++)
+                    if (listBestArea[i].distance(listOptionArea[i].X, listOptionArea[i].Y) < EVKLID_DISTANCE && listOptionArea[j].PointCountBest == 0)
+                    {
+                        listBestArea[i].PointCountBest = listBestArea[i].PointCountBest + 1;
+                        listOptionArea[j].PointCountBest = -1;
+                    }
+            Console.WriteLine("listBestArea");
+            for (int i = 0; i < listBestArea.Count; i++)
+            {
+                Console.WriteLine(listBestArea[i].X + "  " + listBestArea[i].Y + "  " + listBestArea[i].ValueFunc + "   " + listBestArea[i].PointCountBest);
+            }
+            Console.WriteLine("listOptionArea");
+            for (int i = 0; i < listOptionArea.Count; i++)
+            {
+                Console.WriteLine(listOptionArea[i].X + "  " + listOptionArea[i].Y + "  " + listOptionArea[i].ValueFunc + "   " + listOptionArea[i].PointCountBest);
+            }
+
+
+            //Объединяются лучшие области и остальные выбранные в один список для удобства
+            listBee.Clear();
+            for (int i = 0; i < listBestArea.Count; i++)
+            {
+                listBee.Add(listBestArea[i]);
+            }
+            for (int i = 0; i < listOptionArea.Count; i++)
+            {
+                if (listOptionArea[i].PointCountBest != -1)
+                    listBee.Add(listOptionArea[i]);
+            }
+            Console.WriteLine("\n" + "NEW listBee");
+            for (int i = 0; i < listBee.Count; i++)
+            {
+                Console.WriteLine(listBee[i].X + "  " + listBee[i].Y + "  " + listBee[i].ValueFunc + "   " + listBee[i].PointCountBest);
+            }
+
+            List<Bee> listRes = new List<Bee>();
+
+            //Рассматриваем области
+            for (int i = 0; i < listBee.Count; i++)
+            {
+                int centerX = listBee[i].X;
+                int centerY = listBee[i].Y;
+                Console.WriteLine("\n" + "Область: " + i);
+                do
+                {
+                    List<Bee> listN = new List<Bee>();//Пчёлы, посылаемые в область
+                    listN.Add(new Bee(centerX, centerY));
+                    listN[0].ValueFunc = listN[0].amount_nectar();
+                    listN[0].PointCountBest = 0;
+                    int tempCountN;
+                    if (i < bestAreasCount) tempCountN = beeCont_toBest + selectedAreasCount * listBee[i].PointCountBest; //Колличество пчёл, посылаемых на лучшие участки
+                    else tempCountN = selectedAreasCount; //Колличество пчёл, посылаемых на остальные участки
+                                                          //Определяем верхнии и нижние координаты участка (границы области)
+                    int lower_coordX = centerX - areaSize;
+                    int upper_coordX = centerX + areaSize;
+                    int lower_coordY = centerY - areaSize;
+                    int upper_coordY = centerY + areaSize;
+                    //Console.WriteLine("\n"+"lower upper                                  "+lower_coordX+ "   "+upper_coordX+"     "+lower_coordY+"     "+upper_coordY);
+                    for (int j = 1; j < tempCountN + 1; j++)
+                    {//Генерируем точки в области в колличестве пчёл, посылыемых в область
+                        int x = random.Next(upper_coordX - lower_coordX + 1) + lower_coordX;
+                        int y = random.Next(upper_coordY - lower_coordY + 1) + lower_coordY;
+                        listN.Add(new Bee(x, y));
+                        listN[j].ValueFunc = listN[j].amount_nectar();
+                        listN[j].PointCountBest = 0;
+                    }
+
+                    //Сортировка списка для поиска лучших точек
+                    listN.Sort();
+                    listN.Reverse();
+                    print(listN);
+                    bool ch = false;
+                    for (int j = 0; j < TEM_CHEACK.Count; j++)
+                        if (TEM_CHEACK[j].X == listN[0].X && TEM_CHEACK[j].Y == listN[0].Y) ch = true;
+                    if (ch)
+                    {
+                        tem_ch_count++;
+                        TEM_CHEACK.Add(new Bee(listN[0].X, listN[0].Y));
+                        centerX = listN[0].X;
+                        centerY = listN[0].Y;
+                    }
+                    else
+                    {
+                        tem_ch_count = 0;
+                        TEM_CHEACK.Add(new Bee(listN[0].X, listN[0].Y));
+                        centerX = listN[0].X;
+                        centerY = listN[0].Y;
+                    }
+
+                    if (tem_ch_count >= break_parameter) listRes.Add(new Bee(listN[0].X, listN[0].Y));
+                    listN.Clear();
+                } while (tem_ch_count < break_parameter);
+
+                TEM_CHEACK.Clear();
+                tem_ch_count = 0;
+            }
+            /*
+            for(int j =0;j<TEM_CHEACK.Count;j++)
+                        if(TEM_CHEACK[j].x == listN.get(0).x && TEM_CHEACK[j].y == listN.get(0).y ) tem_ch_count++;
+
+                    if(tem_ch_count>=break_parameter) listRes.Add(new Bee(listN.get(0).x,listN.get(0).y));
+                    else {
+                        TEM_CHEACK.Add(new Bee(listN.get(0).x,listN.get(0).y));
+                        centerX = listN.get(0).x;
+                        centerY  = listN.get(0).y;
+                    }
+                    listN.clear();*/
+
+            for (int i = 0; i < listRes.Count; i++)
+            {
+                listRes[i].ValueFunc = listRes[i].amount_nectar();
+            }
+            //Сортировка списка для поиска лучших точек
+            listRes.Sort();
+            listRes.Reverse();
+            Console.WriteLine("\n" + "Варианты: ");
+            for (int i = 0; i < listRes.Count; i++)
+            {
+                Console.WriteLine(listRes[i].X + "   " + listRes[i].Y + "   " + listRes[i].ValueFunc);
+            }
+            Console.WriteLine("\n" + "Лучший вариант: ");
+            Console.WriteLine(listRes[0].X + "   " + listRes[0].Y + "   " + listRes[0].ValueFunc);
+            Console.ReadLine();
+        }
+        private static void print(List<Bee> l)
+        {
+            Console.WriteLine();
+            foreach (Bee b in l)
+                Console.WriteLine("X: " + b.X + ", Y: " + b.Y + ", F: " + b.ValueFunc);
+        }
     }
-
-
-    //Списки хранят лучшие точки и выбранные соответственно
-    List<Bee> listBestArea = new ArrayList<>();//Список лучших точек (первая подобласть)
-    List<Bee> listOptionArea = new ArrayList<>();//Список остальных точек (вторая подобласть)
-        for (int i = 0; i<bestAreasCount; i++){
-            listBestArea.add(new Bee(listBee.get(i).x, listBee.get(i).y));
-        }
-        for (int i = bestAreasCount; i<bestAreasCount + selectedAreasCount; i++){
-            listOptionArea.add(new Bee(listBee.get(i).x, listBee.get(i).y));
-        }
-        for (int i = 0; i<listBestArea.size(); i++){
-            listBestArea.get(i).setValueFunc(listBestArea.get(i).amount_nectar());
-listBestArea.get(i).setPointCountBest(0);
-        }
-        for (int i = 0; i<listOptionArea.size(); i++){
-            listOptionArea.get(i).setValueFunc(listOptionArea.get(i).amount_nectar());
-listOptionArea.get(i).setPointCountBest(0);
-        }
-        
-        //Считаем евклидово расстояние между точками с наибольшим значением функции и другими точками
-        for(int i=0;i<listBestArea.size();i++)
-            for(int j=0;j<listOptionArea.size();j++)
-                if(listBestArea.get(i).distance(listOptionArea.get(i).x, listOptionArea.get(i).y)  < EVKLID_DISTANCE && listOptionArea.get(j).pointCountBest == 0 ){
-                    listBestArea.get(i).setPointCountBest(listBestArea.get(i).pointCountBest+1);
-listOptionArea.get(j).pointCountBest = -1;
-                }
-        System.out.println("listBestArea");
-        for (int i = 0; i<listBestArea.size(); i++){
-            System.out.println(listBestArea.get(i).x+"  "+listBestArea.get(i).y+"  "+listBestArea.get(i).valueFunc+"   "+listBestArea.get(i).pointCountBest);
-        }
-        System.out.println("listOptionArea");
-        for (int i = 0; i<listOptionArea.size(); i++){
-            System.out.println(listOptionArea.get(i).x+"  "+listOptionArea.get(i).y+"  "+listOptionArea.get(i).valueFunc+"   "+listOptionArea.get(i).pointCountBest);
-        }   
-        
-        
-        //Объединяются лучшие области и остальные выбранные в один список для удобства
-        listBee.clear();
-        for(int i = 0; i<listBestArea.size(); i++){
-            listBee.add(listBestArea.get(i));
-        }
-        for (int i = 0; i<listOptionArea.size(); i++){
-            if(listOptionArea.get(i).pointCountBest!= -1)
-                listBee.add(listOptionArea.get(i));
-        }
-        System.out.println("\n"+"NEW listBee");
-        for (int i = 0; i<listBee.size(); i++){
-            System.out.println(listBee.get(i).x+"  "+listBee.get(i).y+"  "+listBee.get(i).valueFunc+"   "+listBee.get(i).pointCountBest);
-        }
-        
-        List<Bee> listRes = new ArrayList<>();
-        
-        //Рассматриваем области
-        for (int i = 0; i<listBee.size(); i++){
-            int centerX = listBee.get(i).x;
-int centerY = listBee.get(i).y;
-System.out.println("\n"+"Область: "+i);
-            do{
-                List<Bee> listN = new ArrayList<>();//Пчёлы, посылаемые в область
-listN.add(new Bee(centerX, centerY));
-                listN.get(0).setValueFunc(listN.get(0).amount_nectar());
-                listN.get(0).setPointCountBest(0);
-int tempCountN;
-                if(i<bestAreasCount) tempCountN =  beeCont_toBest +selectedAreasCount* listBee.get(i).pointCountBest; //Колличество пчёл, посылаемых на лучшие участки
-                else tempCountN = selectedAreasCount; //Колличество пчёл, посылаемых на остальные участки
-                //Определяем верхнии и нижние координаты участка (границы области)
-                int lower_coordX = centerX - areaSize;
-int upper_coordX = centerX + areaSize;
-int lower_coordY = centerY - areaSize;
-int upper_coordY = centerY + areaSize;
-                //System.out.println("\n"+"lower upper                                  "+lower_coordX+ "   "+upper_coordX+"     "+lower_coordY+"     "+upper_coordY);
-                for(int j = 1; j<tempCountN+1;j++){//Генерируем точки в области в колличестве пчёл, посылыемых в область
-                    int x = random.nextInt(upper_coordX - lower_coordX + 1) + lower_coordX;
-int y = random.nextInt(upper_coordY - lower_coordY + 1) + lower_coordY;
-listN.add(new Bee(x, y));
-                    listN.get(j).setValueFunc(listN.get(j).amount_nectar());
-listN.get(j).setPointCountBest(0);
-                }  
-                
-                //Сортировка списка для поиска лучших точек
-                listN.sort(new Comparator<Bee>() {
-                    @Override
-                    public int compare(Bee o1, Bee o2)
-{
-    if (o1.getValueFunc() == o2.getValueFunc()) return 0;
-    else if (o1.getValueFunc() < o2.getValueFunc()) return 1;
-    else return -1;
-}
-                });
-                print(listN);
-boolean ch = false;
-                for(int j =0;j<TEM_CHEACK.size();j++)
-                    if(TEM_CHEACK.get(j).x == listN.get(0).x && TEM_CHEACK.get(j).y == listN.get(0).y ) ch=true;
-                if(ch){
-                    tem_ch_count++;
-                    TEM_CHEACK.add(new Bee(listN.get(0).x,listN.get(0).y));
-                    centerX = listN.get(0).x;
-                    centerY  = listN.get(0).y;
-                }
-                else{
-                    tem_ch_count=0;
-                    TEM_CHEACK.add(new Bee(listN.get(0).x,listN.get(0).y));
-                    centerX = listN.get(0).x;
-                    centerY  = listN.get(0).y;
-                }
-                
-                if(tem_ch_count>=break_parameter) listRes.add(new Bee(listN.get(0).x,listN.get(0).y));
-                listN.clear();
-            }while(tem_ch_count<break_parameter);
-            
-            TEM_CHEACK.clear();
-            tem_ch_count = 0;
-        }
-        /*
-        for(int j =0;j<TEM_CHEACK.size();j++)
-                    if(TEM_CHEACK.get(j).x == listN.get(0).x && TEM_CHEACK.get(j).y == listN.get(0).y ) tem_ch_count++;
-                
-                if(tem_ch_count>=break_parameter) listRes.add(new Bee(listN.get(0).x,listN.get(0).y));
-                else {
-                    TEM_CHEACK.add(new Bee(listN.get(0).x,listN.get(0).y));
-                    centerX = listN.get(0).x;
-                    centerY  = listN.get(0).y;
-                }
-                listN.clear();*/
-        
-        for(int i=0;i<listRes.size();i++){
-            listRes.get(i).setValueFunc(listRes.get(i).amount_nectar());
-        }
-        //Сортировка списка для поиска лучших точек
-        listRes.sort(new Comparator<Bee>() {
-        @Override
-            public int compare(Bee o1, Bee o2)
-{
-    if (o1.getValueFunc() == o2.getValueFunc()) return 0;
-    else if (o1.getValueFunc() < o2.getValueFunc()) return 1;
-    else return -1;
-}
-        });
-        System.out.println("\n"+"Варианты: ");
-        for(int i=0;i<listRes.size();i++){
-            System.out.println(listRes.get(i).x+"   "+listRes.get(i).y+"   "+listRes.get(i).valueFunc);
-        }
-         System.out.println("\n"+"Лучший вариант: ");
-System.out.println(listRes.get(0).x+"   "+listRes.get(0).y+"   "+listRes.get(0).valueFunc);
-    }
-    private static void print(List<Bee> l)
-{
-    System.out.println();
-    for (Bee b : l)
-        System.out.println("X: " + b.x + ", Y: " + b.y + ", F: " + b.valueFunc);
-}
-}
 }
