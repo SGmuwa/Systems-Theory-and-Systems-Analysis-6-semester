@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 namespace lab4
 {
-    public class BeeAlgorithm
+    /// <summary>
+    /// Класс представляет собой реализацию пчелиного алгоритма.
+    /// </summary>
+    public class Program
     {
         //Алгоритм для нескольких экстремумов
         //Области рассматриваются поочерёдно, пока не выпадет максимальная точка определённое количество раз подряд
@@ -13,6 +16,11 @@ namespace lab4
         /// Минимальное растояние между разведчиками.
         /// </summary>
         const double EVKLID_DISTANCE = 2;
+        /// <summary>
+        /// Сколько раз одна и та же пчела в области являлась максимальной?
+        /// Этот параметр задаёт ограничение на это количество.
+        /// <seealso cref="tem_ch_count"/>
+        /// </summary>
         const int break_parameter = 5;
 
         // Про пчёл
@@ -20,55 +28,59 @@ namespace lab4
         /// <summary>
         /// Колличество пчёл разведчиков.
         /// </summary>
-        const int scoutCount = 10;
+        private const int scoutCount = 10;
         /// <summary>
         /// Колличество пчёл, отправляемых на лучшие участки.
         /// </summary>
-        const int beeCont_toBest = 5;
+        private const int beeCont_toBest = 5;
 
 
-        //Про области
+        // Про области
+
         /// <summary>
         /// Колличество лучших участков.
         /// </summary>
-        const int bestAreasCount = 2;
+        private const int bestAreasCount = 2;
         /// <summary>
         /// Колличество выбранных участков.
         /// </summary>
-        const int selectedAreasCount = 3;
+        private const int selectedAreasCount = 3;
         /// <summary>
         /// Размер области для каждого участка.
         /// </summary>
-        const int areaSize = 5;
+        private const int areaSize = 5;
 
         //Границы поиска
         //Область D
-        const int StartX = -100;
-        const int StopX = 100;
-        const int StartY = -100;
-        const int StopY = 100;
+        private const int StartX = -100;
+        private const int StopX = 100;
+        private const int StartY = -100;
+        private const int StopY = 100;
 
-        static List<Bee> TEM_CHEACK = new List<Bee>();
-        static int tem_ch_count = 0;
-        static readonly List<Bee> RES = new List<Bee>();
+        /// <summary>
+        /// Список предназначен для хранения истории найденых
+        /// точек в области с максимальным значением функции.
+        /// </summary>
+        private static List<Bee> TEM_CHEACK = new List<Bee>();
+        /// <summary>
+        /// Сколько раз одна и та же пчела в области являлась максимальной?
+        /// </summary>
+        private static int tem_ch_count = 0;
+
         public static void Main(string[] args)
         {
-            List<Bee> listBee = new List<Bee>();//Точки разведчиков
+            List<Bee> listBee = new List<Bee>(); // Точки разведчиков
             //Генерация случайных точек в области D, куда отправляются пчёлы - разведчики.
             for (int i = 0; i < scoutCount; i++)
             {
-                listBee.Add(new Bee(random.Next(StopX) + StartX, random.Next(StopY) + StartY));
-                double valFunc = listBee[i].AmountNectar();
-                listBee[i].ValueFunc = valFunc;
-                listBee[i].PointCountBest = 0;
+                listBee.Add(new Bee(random.Next(StopX) + StartX, random.Next(StopY) + StartY, 0));
             }
 
             // Сортировка списка для поиска лучших точек
-            listBee.Sort();
-            listBee.Reverse();
+            listBee.Sort((a, b) => -1 * a.CompareTo(b));
 
             for (int i = 0; i < scoutCount; i++)
-                Console.WriteLine(listBee[i].X + "  " + listBee[i].Y + "  " + listBee[i].ValueFunc);
+                Console.WriteLine(listBee[i].ToString());
 
 
             //Списки хранят лучшие точки и выбранные соответственно
@@ -76,24 +88,14 @@ namespace lab4
             List<Bee> listOptionArea = new List<Bee>(); // Список остальных точек (вторая подобласть)
             for (int i = 0; i < bestAreasCount; i++)
             {
-                listBestArea.Add(new Bee(listBee[i].X, listBee[i].Y));
+                listBestArea.Add(listBee[i]);
             }
             for (int i = bestAreasCount; i < bestAreasCount + selectedAreasCount; i++)
             {
-                listOptionArea.Add(new Bee(listBee[i].X, listBee[i].Y));
-            }
-            for (int i = 0; i < listBestArea.Count; i++)
-            {
-                listBestArea[i].ValueFunc = listBestArea[i].AmountNectar();
-                listBestArea[i].PointCountBest = 0;
-            }
-            for (int i = 0; i < listOptionArea.Count; i++)
-            {
-                listOptionArea[i].ValueFunc = listOptionArea[i].AmountNectar();
-                listOptionArea[i].PointCountBest = 0;
+                listOptionArea.Add(listBee[i]);
             }
 
-            //Считаем евклидово расстояние между точками с наибольшим значением функции и другими точками
+            // Считаем евклидово расстояние между точками с наибольшим значением функции и другими точками
             for (int i = 0; i < listBestArea.Count; i++)
                 for (int j = 0; j < listOptionArea.Count; j++)
                     if (listBestArea[i].Distance(listOptionArea[i].X, listOptionArea[i].Y) < EVKLID_DISTANCE && listOptionArea[j].PointCountBest == 0)
@@ -102,17 +104,10 @@ namespace lab4
                         listOptionArea[j].PointCountBest = -1;
                     }
             Console.WriteLine("listBestArea");
-            for (int i = 0; i < listBestArea.Count; i++)
-            {
-                Console.WriteLine(listBestArea[i].X + "  " + listBestArea[i].Y + "  " + listBestArea[i].ValueFunc + "   " + listBestArea[i].PointCountBest);
-            }
+            WriteList(listBestArea, ConsoleColor.White);
             Console.WriteLine("listOptionArea");
-            for (int i = 0; i < listOptionArea.Count; i++)
-            {
-                Console.WriteLine(listOptionArea[i].X + "  " + listOptionArea[i].Y + "  " + listOptionArea[i].ValueFunc + "   " + listOptionArea[i].PointCountBest);
-            }
-
-
+            WriteList(listOptionArea, ConsoleColor.White);
+            
             //Объединяются лучшие области и остальные выбранные в один список для удобства
             listBee.Clear();
             for (int i = 0; i < listBestArea.Count; i++)
@@ -125,10 +120,7 @@ namespace lab4
                     listBee.Add(listOptionArea[i]);
             }
             Console.WriteLine("\nNEW listBee");
-            for (int i = 0; i < listBee.Count; i++)
-            {
-                Console.WriteLine(listBee[i].X + "  " + listBee[i].Y + "  " + listBee[i].ValueFunc + "   " + listBee[i].PointCountBest);
-            }
+            WriteList(listBee, ConsoleColor.White);
 
             List<Bee> listRes = new List<Bee>();
 
@@ -144,7 +136,6 @@ namespace lab4
                     {
                         new Bee(centerX, centerY, 0)
                     };
-                    listN[0].ValueFunc = listN[0].AmountNectar();
                     int tempCountN;
                     if (i < bestAreasCount)
                         // Колличество пчёл, посылаемых на лучшие участки
@@ -157,17 +148,16 @@ namespace lab4
                     int upper_coordX = centerX + areaSize;
                     int lower_coordY = centerY - areaSize;
                     int upper_coordY = centerY + areaSize;
-                    
+
                     for (int j = 1; j < tempCountN + 1; j++)
                     { // Генерируем точки в области в колличестве пчёл, посылыемых в область
                         int x = random.Next(upper_coordX - lower_coordX + 1) + lower_coordX;
                         int y = random.Next(upper_coordY - lower_coordY + 1) + lower_coordY;
                         listN.Add(new Bee(x, y, 0));
-                        listN[j].ValueFunc = listN[j].AmountNectar();
                     }
 
                     // Сортировка списка для поиска лучших точек
-                    listN.Sort((a, b) => -1*a.CompareTo(b));
+                    listN.Sort((a, b) => -1 * a.CompareTo(b));
 
                     WriteList(listN);
                     bool ch = false;
@@ -178,33 +168,22 @@ namespace lab4
                             break;
                         }
                     if (ch)
-                    {
                         tem_ch_count++;
-                        TEM_CHEACK.Add(new Bee(listN[0].X, listN[0].Y));
-                        centerX = listN[0].X;
-                        centerY = listN[0].Y;
-                    }
                     else
-                    {
                         tem_ch_count = 0;
-                        TEM_CHEACK.Add(new Bee(listN[0].X, listN[0].Y));
-                        centerX = listN[0].X;
-                        centerY = listN[0].Y;
-                    }
-
+                    TEM_CHEACK.Add(listN[0]);
+                    centerX = listN[0].X;
+                    centerY = listN[0].Y;
+                    
                     if (tem_ch_count >= break_parameter)
-                        listRes.Add(new Bee(listN[0].X, listN[0].Y));
+                        listRes.Add(listN[0]);
                     listN.Clear();
                 } while (tem_ch_count < break_parameter);
 
                 TEM_CHEACK.Clear();
                 tem_ch_count = 0;
             }
-
-            for (int i = 0; i < listRes.Count; i++)
-            {
-                listRes[i].ValueFunc = listRes[i].AmountNectar();
-            }
+            
             // Сортировка списка для поиска лучших точек
             listRes.Sort((a, b) => -1 * a.CompareTo(b));
 
@@ -218,11 +197,11 @@ namespace lab4
             Console.ReadLine();
         }
 
-        private static void WriteList(IEnumerable list)
+        private static void WriteList(IEnumerable list, ConsoleColor color = ConsoleColor.Yellow)
         {
             Console.WriteLine();
             ConsoleColor old = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = color;
             foreach (object b in list)
                 Console.WriteLine(b.ToString());
             Console.ForegroundColor = old;
