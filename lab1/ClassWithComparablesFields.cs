@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 using System.Reflection;
 
 namespace lab1
@@ -10,7 +11,7 @@ namespace lab1
         public static List<object> VisualSelect(IList<object> fromSelect)
         {
             Type type = SelectConsole(fromSelect, "Какой тип вас интересует?", (object o) => o.GetType());
-            FieldInfo[] fields = type.GetFields(BindingFlags.Instance);
+            FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
             FieldInfo field = SelectFromList(fields, "По какому полю вы хотите сделать поиск?");
             object min = GetValueFromConsole("Минимальное значение поля.", field.FieldType);
             object max = GetValueFromConsole("Максимальное значение поля.", field.FieldType);
@@ -70,18 +71,21 @@ namespace lab1
         {
             Console.WriteLine("Список:");
             list.WriteAllLine(true);
+            if (list.Count == 0)
+                return default(T);
             int i;
             do
             {
-                i = GetValueFromConsole<int>($"Разрешён диапазон с {0} до {list.Count - 1}" + msg);
+                i = GetValueFromConsole<int>($"Разрешён диапазон с {0} до {list.Count - 1} " + msg);
             } while (i < 0 || i >= list.Count);
             return list[i];
         }
 
         private static object GetValueFromConsole(string msg, Type type)
         {
-            MethodInfo method = typeof(ParserWithIComparable).GetMethod("GetValueFromConsole",
-                                BindingFlags.NonPublic | BindingFlags.Static);
+            //typeof(ParserWithIComparable).GetMethods().Single((m) => m.IsGenericMethod && m.IsPrivate && m.Name.Equals("GetValueFromConsole"));
+            MethodInfo method = (from m in typeof(ParserWithIComparable).GetMethods() where 
+             m.IsGenericMethod && m.IsPrivate && m.Name.Equals("GetValueFromConsole") select m).First();
             return method.MakeGenericMethod(type).Invoke(null, new object[] { msg });
         }
 
@@ -96,7 +100,7 @@ namespace lab1
 
         private static bool TryParse<T>(string str, out T value)
         {
-            MethodInfo MethodTryParse = typeof(T).GetMethod("TryParse", BindingFlags.Static);
+            MethodInfo MethodTryParse = GetParser(typeof(T));
             T output = default(T);
             object[] args = new object[] { str, output };
             bool ret = (bool)MethodTryParse.Invoke(null, args);
@@ -105,6 +109,12 @@ namespace lab1
             else
                 value = default(T); 
             return ret;
+        }
+
+        private static MethodInfo GetParser(Type t)
+        {
+            return t.GetMethod("TryParse", new Type[] { typeof(string), t.MakeByRefType() }) ??
+                throw new NullReferenceException();
         }
     }
 }

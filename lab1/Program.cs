@@ -32,16 +32,9 @@ namespace lab1
             list.FindClasses((Рукотворство.Здания t) => t.Адрес == "Огкипа 5")
                 .ИсточникПоследнегоИзменения.Add(list.FindClasses((Сотрудник.Инжерен t) => t.Имя == "Шопок Оаклу Воалк"));
 
-            Type[] types = new Type[] { typeof(ЗемляИПочва), typeof(Сотрудник.Менеджер), typeof(Сотрудник.Инжерен), typeof(Сотрудник.Пахарь), typeof(Рукотворство.Здания) };
-
             list.WriteAllLine();
 
-            ushort indexNeed;
-            do
-            {
-                Console.WriteLine("Кто вам нужен?");
-                types.WriteAll();
-            } while (!ushort.TryParse(Console.ReadLine(), out indexNeed) || indexNeed >= types.Length);
+            ParserWithIComparable.VisualSelect(list);
 
             Console.ReadLine();
         }
@@ -78,7 +71,7 @@ namespace lab1
             {
                 if(needNumbers)
                 {
-                    sb.Append(i);
+                    sb.Append(i++);
                     sb.Append(". ");
                 }
                 sb.Append(v);
