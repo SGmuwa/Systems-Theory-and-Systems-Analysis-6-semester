@@ -1,37 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Reflection;
 
 namespace lab1
 {
-    public static class SorterHelper
+    public class ParserWithIComparable<T> where T : IComparable<T>
     {
-
-    }
-
-
-    public class ClassWithComparablesFields
-    {
-        public readonly List<ParserWithIComparable> comparables;
-
-        public ClassWithComparablesFields(params ParserWithIComparable[] comparables)
+        public ParserWithIComparable(string NameField, T Value = default(T))
         {
-            this.comparables = new List<ParserWithIComparable>(comparables);
-        }
-    }
-    public struct ParserWithIComparable
-    {
-        public ParserWithIComparable(TryParser TryParser, Func<IComparable> GetValue, string NameField)
-        {
-            this.Parser = (string input, out object output) => { output = null; return int.Parse(input, output)};
-            this.GetValue = GetValue;
             this.NameField = NameField;
+            this.Value = Value;
         }
 
         public string NameField { get; }
-        public TryParser Parser { get; }
-        public Func<IComparable> GetValue { get; }
+        public T Value { get; set; }
+        public MethodInfo MethodTryParse = typeof(T).GetMethod("TryParse", BindingFlags.Static);
 
-        public delegate bool TryParser<out T>(string input, out T output);
+        private bool ParseSet(string str) 
+        {
+            T output = default(T);
+            object[] args = new object[] { str, output };
+            bool ret = (bool)MethodTryParse.Invoke(null, args);
+            if(ret)
+                Value = (T)args[1];
+            return ret;
+        }
+
+        public override string ToString()
+            => Value?.ToString();
     }
 }

@@ -28,11 +28,7 @@ namespace lab1
 
         public override string ToString()
             => ToStringSafeDeep(() => $"{typeof(ЗемляИПочва)} ДатаПоследнегоИспользования: {ДатаПоследнегоИспользования}, ИндентификаторПоложенияЗемли: {ИндентификаторПоложенияЗемли}");
-
-        public static ClassWithComparablesFields GetFields
-            => new ClassWithComparablesFields(
-                  new ParserWithIComparable((str) => DateTime.Parse(str), DateTime.Now, "ДатаПоследнегоИспользования")
-                  );
+        
     }
     
     public abstract class Сотрудник
