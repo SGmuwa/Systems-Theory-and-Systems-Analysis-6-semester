@@ -66,15 +66,21 @@ namespace lab1
         public static void WriteAll<T>(this IEnumerable<T> values)
             => Console.WriteLine(values.ToStringAll(", "));
 
-        public static void WriteAllLine<T>(this IEnumerable<T> values)
-            => Console.WriteLine(values.ToStringAll("\n"));
+        public static void WriteAllLine<T>(this IEnumerable<T> values, bool needNumbers = false)
+            => Console.WriteLine(values.ToStringAll("\n", needNumbers));
 
-        public static string ToStringAll<T>(this IEnumerable<T> values, string separator = ", ")
+        public static string ToStringAll<T>(this IEnumerable<T> values, string separator = ", ", bool needNumbers = false)
         {
             StringBuilder sb = new StringBuilder();
             IEnumerator<T> en = values.GetEnumerator();
+            int i = 0;
             foreach(T v in values)
             {
+                if(needNumbers)
+                {
+                    sb.Append(i);
+                    sb.Append(". ");
+                }
                 sb.Append(v);
                 sb.Append(separator);
             }

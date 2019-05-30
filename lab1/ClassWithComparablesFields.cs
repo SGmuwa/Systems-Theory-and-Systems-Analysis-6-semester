@@ -5,29 +5,106 @@ using System.Reflection;
 
 namespace lab1
 {
-    public class ParserWithIComparable<T> where T : IComparable<T>
+    public static class ParserWithIComparable
     {
-        public ParserWithIComparable(string NameField, T Value = default(T))
+        public static List<object> VisualSelect(IList<object> fromSelect)
         {
-            this.NameField = NameField;
-            this.Value = Value;
+            Type type = SelectConsole(fromSelect, "Какой тип вас интересует?", (object o) => o.GetType());
+            FieldInfo[] fields = type.GetFields(BindingFlags.Instance);
+            FieldInfo field = SelectFromList(fields, "По какому полю вы хотите сделать поиск?");
+            object min = GetValueFromConsole("Минимальное значение поля.", field.FieldType);
+            object max = GetValueFromConsole("Максимальное значение поля.", field.FieldType);
+            List<object> sortedList = new List<object>();
+            Comparer comparer = new Comparer(type, field);
+            foreach(object o in fromSelect)
+            {
+                if(o.GetType().Equals(type) && comparer.Compare(min, o) <= 0 && comparer.Compare(o, max) <= 0)
+                {
+                    sortedList.Add(o);
+                }
+            }
+            sortedList.Sort(comparer);
+            Console.WriteLine("Результат:");
+            sortedList.WriteAllLine(true);
+            return sortedList;
         }
 
-        public string NameField { get; }
-        public T Value { get; set; }
-        public MethodInfo MethodTryParse = typeof(T).GetMethod("TryParse", BindingFlags.Static);
-
-        private bool ParseSet(string str) 
+        class Comparer : IComparer, IComparer<object>
         {
+            public Comparer(Type @class, FieldInfo field, bool isReverse = false)
+            {
+                this.@class = @class;
+                this.field = field;
+                this.isReverse = isReverse;
+            }
+
+            public Type @class;
+            public FieldInfo field;
+            public bool isReverse;
+
+            public int Compare(object x, object y)
+            {
+                if (x == null || y == null)
+                    throw new ArgumentNullException();
+                if (x.GetType().Equals(@class) && y.GetType().Equals(@class))
+                {
+                    return (isReverse ? -1 : 1) * ((IComparable)field.GetValue(x)).CompareTo(field.GetValue(y));
+                }
+                else
+                    throw new NotSupportedException($"{x}, {y}, {@class}");
+            }
+        }
+
+        private static T SelectConsole<T>(IList<object> from, string msg, Func<object, T> GetInList)
+        {
+            // Поиск уникальных типов.
+            HashSet<T> typesSet = new HashSet<T>();
+            foreach (object o in from)
+                typesSet.Add(GetInList(o));
+
+            List<T> types = new List<T>(typesSet);
+            return SelectFromList(types, msg);
+        }
+
+        private static T SelectFromList<T>(IList<T> list, string msg)
+        {
+            Console.WriteLine("Список:");
+            list.WriteAllLine(true);
+            int i;
+            do
+            {
+                i = GetValueFromConsole<int>($"Разрешён диапазон с {0} до {list.Count - 1}" + msg);
+            } while (i < 0 || i >= list.Count);
+            return list[i];
+        }
+
+        private static object GetValueFromConsole(string msg, Type type)
+        {
+            MethodInfo method = typeof(ParserWithIComparable).GetMethod("GetValueFromConsole",
+                                BindingFlags.NonPublic | BindingFlags.Static);
+            return method.MakeGenericMethod(type).Invoke(null, new object[] { msg });
+        }
+
+        private static T GetValueFromConsole<T>(string msg)
+        {
+            T output;
+            Console.Write(msg);
+            while (!TryParse(Console.ReadLine(), out output))
+                Console.WriteLine("Ошибка при чтении. Попробуйте ещё раз.");
+            return output;
+        }
+
+        private static bool TryParse<T>(string str, out T value)
+        {
+            MethodInfo MethodTryParse = typeof(T).GetMethod("TryParse", BindingFlags.Static);
             T output = default(T);
             object[] args = new object[] { str, output };
             bool ret = (bool)MethodTryParse.Invoke(null, args);
-            if(ret)
-                Value = (T)args[1];
+            if (ret)
+                value = (T)args[1];
+            else
+                value = default(T); 
             return ret;
         }
-
-        public override string ToString()
-            => Value?.ToString();
     }
 }
