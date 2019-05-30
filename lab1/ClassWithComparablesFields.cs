@@ -47,9 +47,15 @@ namespace lab1
             {
                 if (x == null || y == null)
                     throw new ArgumentNullException();
-                if (x.GetType().Equals(@class) && y.GetType().Equals(@class))
+
+                if ((x.GetType().Equals(@class) || x.GetType().Equals(field.FieldType))
+                    && (y.GetType().Equals(@class) || y.GetType().Equals(field.FieldType)))
                 {
-                    return (isReverse ? -1 : 1) * ((IComparable)field.GetValue(x)).CompareTo(field.GetValue(y));
+                    if (x.GetType().Equals(@class))
+                        x = field.GetValue(x);
+                    if (y.GetType().Equals(@class))
+                        y = field.GetValue(y);
+                    return (isReverse ? -1 : 1) * ((IComparable)x).CompareTo(y);
                 }
                 else
                     throw new NotSupportedException($"{x}, {y}, {@class}");
@@ -83,9 +89,9 @@ namespace lab1
 
         private static object GetValueFromConsole(string msg, Type type)
         {
-            //typeof(ParserWithIComparable).GetMethods().Single((m) => m.IsGenericMethod && m.IsPrivate && m.Name.Equals("GetValueFromConsole"));
-            MethodInfo method = (from m in typeof(ParserWithIComparable).GetMethods() where 
-             m.IsGenericMethod && m.IsPrivate && m.Name.Equals("GetValueFromConsole") select m).First();
+            
+            MethodInfo method = typeof(ParserWithIComparable).GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Single((m)
+                => m.IsGenericMethod && m.Name.Equals("GetValueFromConsole"));
             return method.MakeGenericMethod(type).Invoke(null, new object[] { msg });
         }
 
@@ -94,7 +100,7 @@ namespace lab1
             T output;
             Console.Write(msg);
             while (!TryParse(Console.ReadLine(), out output))
-                Console.WriteLine("Ошибка при чтении. Попробуйте ещё раз.");
+                Console.WriteLine($"Ошибка при чтении. Попробуйте ещё раз. Например, {default(T)}");
             return output;
         }
 
