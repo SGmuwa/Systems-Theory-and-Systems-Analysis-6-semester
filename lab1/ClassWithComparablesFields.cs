@@ -11,13 +11,17 @@ namespace lab1
         public static List<object> VisualSelect(IList<object> fromSelect)
         {
             Type type = SelectConsole(fromSelect, "Какой тип вас интересует?", (object o) => o.GetType());
-            FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
+            List<object> OnlyOneType = new List<object>(fromSelect);
+            OnlyOneType.RemoveAll(c => c.GetType() != type);
+            OnlyOneType.WriteAllLine();
+            List<FieldInfo> fields = new List<FieldInfo>(type.GetFields(BindingFlags.Public | BindingFlags.Instance));
+            fields.RemoveAll(m => m.FieldType.GetInterface("IEnumerable") != null);
             FieldInfo field = SelectFromList(fields, "По какому полю вы хотите сделать поиск?");
             object min = GetValueFromConsole("Минимальное значение поля.", field.FieldType);
             object max = GetValueFromConsole("Максимальное значение поля.", field.FieldType);
             List<object> sortedList = new List<object>();
             Comparer comparer = new Comparer(type, field);
-            foreach(object o in fromSelect)
+            foreach(object o in OnlyOneType)
             {
                 if(o.GetType().Equals(type) && comparer.Compare(min, o) <= 0 && comparer.Compare(o, max) <= 0)
                 {
@@ -106,21 +110,15 @@ namespace lab1
 
         private static bool TryParse<T>(string str, out T value)
         {
-            MethodInfo MethodTryParse = GetParser(typeof(T));
-            T output = default(T);
-            object[] args = new object[] { str, output };
-            bool ret = (bool)MethodTryParse.Invoke(null, args);
-            if (ret)
-                value = (T)args[1];
-            else
-                value = default(T); 
-            return ret;
-        }
-
-        private static MethodInfo GetParser(Type t)
-        {
-            return t.GetMethod("TryParse", new Type[] { typeof(string), t.MakeByRefType() }) ??
-                throw new NullReferenceException();
+            value = default(T);
+            try
+            {
+                value = (T)Convert.ChangeType(str, typeof(T));
+            } catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

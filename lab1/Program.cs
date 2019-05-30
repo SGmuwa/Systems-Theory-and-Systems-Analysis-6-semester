@@ -35,22 +35,9 @@ namespace lab1
             list.WriteAllLine();
 
             ParserWithIComparable.VisualSelect(list);
-
             Console.ReadLine();
         }
         
-
-        public static List<T> FindAllClasses<T>(this IEnumerable<T> list, Type search)
-        {
-            List<T> output = new List<T>();
-            foreach(T v in list)
-            {
-                if (v.GetType().Equals(search))
-                    output.Add(v);
-            }
-            return output;
-        }
-
         public static SEARCH FindClasses<SEARCH, T>(this List<T> list, Predicate<SEARCH> match) where SEARCH : T
         {
             return ((SEARCH)list.Find((T o) => o is SEARCH && match.Invoke((SEARCH)o)));
