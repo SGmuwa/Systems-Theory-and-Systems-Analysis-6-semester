@@ -4,6 +4,12 @@ using System.Collections;
 
 namespace lab1
 {
+    public static class SorterHelper
+    {
+
+    }
+
+
     public class ClassWithComparablesFields
     {
         public readonly List<ParserWithIComparable> comparables;
@@ -15,15 +21,17 @@ namespace lab1
     }
     public struct ParserWithIComparable
     {
-        public ParserWithIComparable(Func<string, object> Parser, IComparable Comparable, string Name)
+        public ParserWithIComparable(TryParser TryParser, Func<IComparable> GetValue, string NameField)
         {
-            this.Parser = Parser;
-            this.Comparable = Comparable;
-            this.Name = Name;
+            this.Parser = (string input, out object output) => { output = null; return int.Parse(input, output)};
+            this.GetValue = GetValue;
+            this.NameField = NameField;
         }
 
-        public string Name;
-        public Func<string, object> Parser;
-        public IComparable Comparable;
+        public string NameField { get; }
+        public TryParser Parser { get; }
+        public Func<IComparable> GetValue { get; }
+
+        public delegate bool TryParser<out T>(string input, out T output);
     }
 }

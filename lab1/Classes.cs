@@ -22,7 +22,6 @@ namespace lab1
 
     public class ЗемляИПочва
     {
-        
         public DateTime ДатаПоследнегоИспользования;
         
         public long ИндентификаторПоложенияЗемли;
