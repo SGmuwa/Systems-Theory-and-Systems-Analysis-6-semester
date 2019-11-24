@@ -1,0 +1,154 @@
+@prefix : <http://www.semanticweb.org/mothe/ontologies/2019/2/untitled-ontology-3#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1> .
+
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/birth
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/birth> rdf:type owl:ObjectProperty ;
+                                                                     rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/check
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/check> rdf:type owl:ObjectProperty ;
+                                                                     rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/name
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/name> rdf:type owl:ObjectProperty ;
+                                                                    rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/overdraft
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/overdraft> rdf:type owl:ObjectProperty ;
+                                                                         rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/probation
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/probation> rdf:type owl:ObjectProperty ;
+                                                                         rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/salary
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/salary> rdf:type owl:ObjectProperty ;
+                                                                      rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/telephone
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/telephone> rdf:type owl:ObjectProperty ;
+                                                                         rdfs:subPropertyOf owl:topObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Foreman
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Foreman> rdf:type owl:Class ;
+                                                                        rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Mechanic
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Mechanic> rdf:type owl:Class ;
+                                                                         rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Technologist
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Technologist> rdf:type owl:Class ;
+                                                                             rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Electric
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Electric> rdf:type owl:Class ;
+                                                                                     rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Fitter
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Fitter> rdf:type owl:Class ;
+                                                                                   rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Foreman
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Foreman> rdf:type owl:Class ;
+                                                                                    rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Mechanic
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Mechanic> rdf:type owl:Class ;
+                                                                                     rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Confectioner
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Confectioner> rdf:type owl:Class ;
+                                                                                             rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Foreman
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Foreman> rdf:type owl:Class ;
+                                                                                        rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Glazirovschik
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Glazirovschik> rdf:type owl:Class ;
+                                                                                              rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Master
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Master> rdf:type owl:Class ;
+                                                                                       rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Packer
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Packer> rdf:type owl:Class ;
+                                                                                       rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+
+
+###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Technologist
+<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Technologist> rdf:type owl:Class ;
+                                                                                             rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Foreman>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Mechanic>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Technologist>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Confectioner>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Foreman>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Glazirovschik>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Master>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Packer>
+                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Technologist>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
