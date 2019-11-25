@@ -2,10 +2,10 @@
 {
     public class Element
     {
-        public Element(int id, double veroyatnost)
+        public Element(int id, double probability)
         {
             Id = id;
-            Veroyatnost = veroyatnost;
+            Probability = probability;
         }
 
         /// <summary>
@@ -16,6 +16,6 @@
         /// <summary>
         /// Вероятность попасть в эту вершину.
         /// </summary>
-        public double Veroyatnost { get; set; }
+        public double Probability { get; set; }
     }
 }

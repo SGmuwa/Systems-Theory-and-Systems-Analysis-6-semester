@@ -7,7 +7,7 @@ namespace lab3
         public CurrentPath(int idAnt)
             => IdAnt = idAnt;
 
-        public List<double> MasVesov { get; set; } = new List<double>();
+        public List<double> Weight { get; set; } = new List<double>();
 
         public int IdAnt { get; set; }
 
