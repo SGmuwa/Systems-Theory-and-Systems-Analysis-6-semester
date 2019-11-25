@@ -1,154 +1,280 @@
-@prefix : <http://www.semanticweb.org/mothe/ontologies/2019/2/untitled-ontology-3#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1> .
-
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1> rdf:type owl:Ontology .
-
-#################################################################
-#    Object Properties
-#################################################################
-
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/birth
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/birth> rdf:type owl:ObjectProperty ;
-                                                                     rdfs:subPropertyOf owl:topObjectProperty .
+<?xml version="1.0"?>
+<rdf:RDF xmlns="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#"
+     xml:base="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#">
+    <owl:Ontology rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/check
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/check> rdf:type owl:ObjectProperty ;
-                                                                     rdfs:subPropertyOf owl:topObjectProperty .
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/name
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/name> rdf:type owl:ObjectProperty ;
-                                                                    rdfs:subPropertyOf owl:topObjectProperty .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#АннотацияТест -->
+
+    <owl:AnnotationProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#АннотацияТест"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/overdraft
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/overdraft> rdf:type owl:ObjectProperty ;
-                                                                         rdfs:subPropertyOf owl:topObjectProperty .
+    <!-- http://www.w3.org/2000/01/rdf-schema#subClassOf -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/probation
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/probation> rdf:type owl:ObjectProperty ;
-                                                                         rdfs:subPropertyOf owl:topObjectProperty .
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/salary
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/salary> rdf:type owl:ObjectProperty ;
-                                                                      rdfs:subPropertyOf owl:topObjectProperty .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИсточникПоследнегоИзменения -->
+
+    <owl:ObjectProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИсточникПоследнегоИзменения"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/telephone
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/prop/telephone> rdf:type owl:ObjectProperty ;
-                                                                         rdfs:subPropertyOf owl:topObjectProperty .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОтветственныйЗа -->
+
+    <owl:ObjectProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОтветственныйЗа">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
 
 
-#################################################################
-#    Classes
-#################################################################
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> rdf:type owl:Class .
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Foreman
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Foreman> rdf:type owl:Class ;
-                                                                        rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Адрес -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Адрес"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Mechanic
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Mechanic> rdf:type owl:Class ;
-                                                                         rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаИзмененияСостояния -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаИзмененияСостояния"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Technologist
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Technologist> rdf:type owl:Class ;
-                                                                             rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПоследнегоИспользования -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПоследнегоИспользования"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Electric
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Electric> rdf:type owl:Class ;
-                                                                                     rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПринятияНаРаботу -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПринятияНаРаботу"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Fitter
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Fitter> rdf:type owl:Class ;
-                                                                                   rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИдентификаторЗемли -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИдентификаторЗемли"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Foreman
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Foreman> rdf:type owl:Class ;
-                                                                                    rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#КоличественноеИзменение -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#КоличественноеИзменение"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Mechanic
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service/Mechanic> rdf:type owl:Class ;
-                                                                                     rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technical_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ПропертиТест -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ПропертиТест"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Confectioner
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Confectioner> rdf:type owl:Class ;
-                                                                                             rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонПоКоторомуЗвонятКлиенты -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонПоКоторомуЗвонятКлиенты"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Foreman
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Foreman> rdf:type owl:Class ;
-                                                                                        rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонСотрудника -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонСотрудника"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Glazirovschik
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Glazirovschik> rdf:type owl:Class ;
-                                                                                              rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ФИО -->
+
+    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ФИО"/>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Master
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Master> rdf:type owl:Class ;
-                                                                                       rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Packer
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Packer> rdf:type owl:Class ;
-                                                                                       rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Здания -->
+
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Здания">
+        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Рукотворство"/>
+    </owl:Class>
+    
 
 
-###  http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Technologist
-<http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Technologist> rdf:type owl:Class ;
-                                                                                             rdfs:subClassOf <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service> .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва -->
+
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва">
+        <rdfs:subClassOf rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:subClassOf>
+    </owl:Class>
+    
 
 
-#################################################################
-#    General axioms
-#################################################################
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Инженер -->
 
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Foreman>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Mechanic>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Guide/Technologist>
-              )
-] .
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Инженер">
+        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    </owl:Class>
+    
 
 
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Confectioner>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Foreman>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Glazirovschik>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Master>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Packer>
-                <http://www.semanticweb.org/mothe/ontologies/2019/2/lab1/Technological_Service/Technologist>
-              )
-] .
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Менеджер -->
+
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Менеджер">
+        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    </owl:Class>
+    
 
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Пахарь -->
+
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Пахарь">
+        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    </owl:Class>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Рукотворство -->
+
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Рукотворство"/>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник -->
+
+    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Ангар -->
+
+    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Ангар">
+        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Здания"/>
+        <ИсточникПоследнегоИзменения rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ШопокОаклуВоалк"/>
+        <Адрес rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Огкипа 5</Адрес>
+        <ДатаИзмененияСостояния rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-02-02T01:01:01Z</ДатаИзмененияСостояния>
+        <КоличественноеИзменение rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</КоличественноеИзменение>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОкоешАкорпОекгв -->
+
+    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОкоешАкорпОекгв">
+        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Пахарь"/>
+        <ОтветственныйЗа rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Поле"/>
+        <ОтветственныйЗа rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#УОзера"/>
+        <ДатаПринятияНаРаботу rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-02-03T01:00:00Z</ДатаПринятияНаРаботу>
+        <ТелефонСотрудника rdf:datatype="http://www.w3.org/2001/XMLSchema#long">12923949393</ТелефонСотрудника>
+        <ФИО rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Окоеш Акорп Оекгв</ФИО>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Поле -->
+
+    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Поле">
+        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва"/>
+        <ДатаПоследнегоИспользования rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-01-02T01:00:00Z</ДатаПоследнегоИспользования>
+        <ИдентификаторЗемли rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</ИдентификаторЗемли>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#РокаовЕаоуОкшалц -->
+
+    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#РокаовЕаоуОкшалц">
+        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Менеджер"/>
+        <ДатаПринятияНаРаботу rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-01-02T01:00:00Z</ДатаПринятияНаРаботу>
+        <ТелефонПоКоторомуЗвонятКлиенты rdf:datatype="http://www.w3.org/2001/XMLSchema#long">10485930485</ТелефонПоКоторомуЗвонятКлиенты>
+        <ТелефонСотрудника rdf:datatype="http://www.w3.org/2001/XMLSchema#long">2949850395903</ТелефонСотрудника>
+        <ФИО rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Рокаов Еаоу Окшалц</ФИО>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#УОзера -->
+
+    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#УОзера">
+        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва"/>
+        <ДатаПоследнегоИспользования rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-01-02T01:00:00Z</ДатаПоследнегоИспользования>
+        <ИдентификаторЗемли rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</ИдентификаторЗемли>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ШопокОаклуВоалк -->
+
+    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ШопокОаклуВоалк">
+        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Инженер"/>
+        <ДатаПринятияНаРаботу rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-02-02T01:00:00Z</ДатаПринятияНаРаботу>
+        <ТелефонСотрудника rdf:datatype="http://www.w3.org/2001/XMLSchema#long">238348732832</ТелефонСотрудника>
+        <ФИО rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Шопок Оаклу Воалк</ФИО>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
