@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#"
-     xml:base="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl"
+<rdf:RDF xmlns="file:/lab1.owl#"
+     xml:base="file:/lab1.owl"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -10,7 +10,7 @@
      xmlns:swrl="http://www.w3.org/2003/11/swrl#"
      xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
      xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#">
-    <owl:Ontology rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl"/>
+    <owl:Ontology rdf:about="file:/lab1.owl"/>
     
 
 
@@ -25,9 +25,9 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#АннотацияТест -->
+    <!-- file:/lab1.owl#АннотацияТест -->
 
-    <owl:AnnotationProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#АннотацияТест"/>
+    <owl:AnnotationProperty rdf:about="file:/lab1.owl#АннотацияТест"/>
     
 
 
@@ -48,15 +48,15 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИсточникПоследнегоИзменения -->
+    <!-- file:/lab1.owl#ИсточникПоследнегоИзменения -->
 
-    <owl:ObjectProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИсточникПоследнегоИзменения"/>
+    <owl:ObjectProperty rdf:about="file:/lab1.owl#ИсточникПоследнегоИзменения"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОтветственныйЗа -->
+    <!-- file:/lab1.owl#ОтветственныйЗа -->
 
-    <owl:ObjectProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОтветственныйЗа">
+    <owl:ObjectProperty rdf:about="file:/lab1.owl#ОтветственныйЗа">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </owl:ObjectProperty>
     
@@ -73,63 +73,63 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Адрес -->
+    <!-- file:/lab1.owl#Адрес -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Адрес"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#Адрес"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаИзмененияСостояния -->
+    <!-- file:/lab1.owl#ДатаИзмененияСостояния -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаИзмененияСостояния"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ДатаИзмененияСостояния"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПоследнегоИспользования -->
+    <!-- file:/lab1.owl#ДатаПоследнегоИспользования -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПоследнегоИспользования"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ДатаПоследнегоИспользования"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПринятияНаРаботу -->
+    <!-- file:/lab1.owl#ДатаПринятияНаРаботу -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ДатаПринятияНаРаботу"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ДатаПринятияНаРаботу"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИдентификаторЗемли -->
+    <!-- file:/lab1.owl#ИдентификаторЗемли -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ИдентификаторЗемли"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ИдентификаторЗемли"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#КоличественноеИзменение -->
+    <!-- file:/lab1.owl#КоличественноеИзменение -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#КоличественноеИзменение"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#КоличественноеИзменение"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ПропертиТест -->
+    <!-- file:/lab1.owl#ПропертиТест -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ПропертиТест"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ПропертиТест"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонПоКоторомуЗвонятКлиенты -->
+    <!-- file:/lab1.owl#ТелефонПоКоторомуЗвонятКлиенты -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонПоКоторомуЗвонятКлиенты"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ТелефонПоКоторомуЗвонятКлиенты"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонСотрудника -->
+    <!-- file:/lab1.owl#ТелефонСотрудника -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ТелефонСотрудника"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ТелефонСотрудника"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ФИО -->
+    <!-- file:/lab1.owl#ФИО -->
 
-    <owl:DatatypeProperty rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ФИО"/>
+    <owl:DatatypeProperty rdf:about="file:/lab1.owl#ФИО"/>
     
 
 
@@ -144,55 +144,55 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Здания -->
+    <!-- file:/lab1.owl#Здания -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Здания">
-        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Рукотворство"/>
+    <owl:Class rdf:about="file:/lab1.owl#Здания">
+        <rdfs:subClassOf rdf:resource="file:/lab1.owl#Рукотворство"/>
     </owl:Class>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва -->
+    <!-- file:/lab1.owl#ЗемляИПочва -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва">
+    <owl:Class rdf:about="file:/lab1.owl#ЗемляИПочва">
         <rdfs:subClassOf rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:subClassOf>
     </owl:Class>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Инженер -->
+    <!-- file:/lab1.owl#Инженер -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Инженер">
-        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    <owl:Class rdf:about="file:/lab1.owl#Инженер">
+        <rdfs:subClassOf rdf:resource="file:/lab1.owl#Сотрудник"/>
     </owl:Class>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Менеджер -->
+    <!-- file:/lab1.owl#Менеджер -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Менеджер">
-        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    <owl:Class rdf:about="file:/lab1.owl#Менеджер">
+        <rdfs:subClassOf rdf:resource="file:/lab1.owl#Сотрудник"/>
     </owl:Class>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Пахарь -->
+    <!-- file:/lab1.owl#Пахарь -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Пахарь">
-        <rdfs:subClassOf rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    <owl:Class rdf:about="file:/lab1.owl#Пахарь">
+        <rdfs:subClassOf rdf:resource="file:/lab1.owl#Сотрудник"/>
     </owl:Class>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Рукотворство -->
+    <!-- file:/lab1.owl#Рукотворство -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Рукотворство"/>
+    <owl:Class rdf:about="file:/lab1.owl#Рукотворство"/>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник -->
+    <!-- file:/lab1.owl#Сотрудник -->
 
-    <owl:Class rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Сотрудник"/>
+    <owl:Class rdf:about="file:/lab1.owl#Сотрудник"/>
     
 
 
@@ -207,11 +207,11 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Ангар -->
+    <!-- file:/lab1.owl#Ангар -->
 
-    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Ангар">
-        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Здания"/>
-        <ИсточникПоследнегоИзменения rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ШопокОаклуВоалк"/>
+    <owl:NamedIndividual rdf:about="file:/lab1.owl#Ангар">
+        <rdf:type rdf:resource="file:/lab1.owl#Здания"/>
+        <ИсточникПоследнегоИзменения rdf:resource="file:/lab1.owl#ШопокОаклуВоалк"/>
         <Адрес rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Огкипа 5</Адрес>
         <ДатаИзмененияСостояния rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-02-02T01:01:01Z</ДатаИзмененияСостояния>
         <КоличественноеИзменение rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</КоличественноеИзменение>
@@ -219,12 +219,12 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОкоешАкорпОекгв -->
+    <!-- file:/lab1.owl#ОкоешАкорпОекгв -->
 
-    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ОкоешАкорпОекгв">
-        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Пахарь"/>
-        <ОтветственныйЗа rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Поле"/>
-        <ОтветственныйЗа rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#УОзера"/>
+    <owl:NamedIndividual rdf:about="file:/lab1.owl#ОкоешАкорпОекгв">
+        <rdf:type rdf:resource="file:/lab1.owl#Пахарь"/>
+        <ОтветственныйЗа rdf:resource="file:/lab1.owl#Поле"/>
+        <ОтветственныйЗа rdf:resource="file:/lab1.owl#УОзера"/>
         <ДатаПринятияНаРаботу rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-02-03T01:00:00Z</ДатаПринятияНаРаботу>
         <ТелефонСотрудника rdf:datatype="http://www.w3.org/2001/XMLSchema#long">12923949393</ТелефонСотрудника>
         <ФИО rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Окоеш Акорп Оекгв</ФИО>
@@ -232,20 +232,20 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Поле -->
+    <!-- file:/lab1.owl#Поле -->
 
-    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Поле">
-        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва"/>
+    <owl:NamedIndividual rdf:about="file:/lab1.owl#Поле">
+        <rdf:type rdf:resource="file:/lab1.owl#ЗемляИПочва"/>
         <ДатаПоследнегоИспользования rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-01-02T01:00:00Z</ДатаПоследнегоИспользования>
         <ИдентификаторЗемли rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</ИдентификаторЗемли>
     </owl:NamedIndividual>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#РокаовЕаоуОкшалц -->
+    <!-- file:/lab1.owl#РокаовЕаоуОкшалц -->
 
-    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#РокаовЕаоуОкшалц">
-        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Менеджер"/>
+    <owl:NamedIndividual rdf:about="file:/lab1.owl#РокаовЕаоуОкшалц">
+        <rdf:type rdf:resource="file:/lab1.owl#Менеджер"/>
         <ДатаПринятияНаРаботу rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-01-02T01:00:00Z</ДатаПринятияНаРаботу>
         <ТелефонПоКоторомуЗвонятКлиенты rdf:datatype="http://www.w3.org/2001/XMLSchema#long">10485930485</ТелефонПоКоторомуЗвонятКлиенты>
         <ТелефонСотрудника rdf:datatype="http://www.w3.org/2001/XMLSchema#long">2949850395903</ТелефонСотрудника>
@@ -254,20 +254,20 @@
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#УОзера -->
+    <!-- file:/lab1.owl#УОзера -->
 
-    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#УОзера">
-        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ЗемляИПочва"/>
+    <owl:NamedIndividual rdf:about="file:/lab1.owl#УОзера">
+        <rdf:type rdf:resource="file:/lab1.owl#ЗемляИПочва"/>
         <ДатаПоследнегоИспользования rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-01-02T01:00:00Z</ДатаПоследнегоИспользования>
         <ИдентификаторЗемли rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</ИдентификаторЗемли>
     </owl:NamedIndividual>
     
 
 
-    <!-- file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ШопокОаклуВоалк -->
+    <!-- file:/lab1.owl#ШопокОаклуВоалк -->
 
-    <owl:NamedIndividual rdf:about="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#ШопокОаклуВоалк">
-        <rdf:type rdf:resource="file:/home/sgmuwa/Documents/git/Systems-Theory-and-Systems-Analysis-6-semester/lab1.owl#Инженер"/>
+    <owl:NamedIndividual rdf:about="file:/lab1.owl#ШопокОаклуВоалк">
+        <rdf:type rdf:resource="file:/lab1.owl#Инженер"/>
         <ДатаПринятияНаРаботу rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">0001-02-02T01:00:00Z</ДатаПринятияНаРаботу>
         <ТелефонСотрудника rdf:datatype="http://www.w3.org/2001/XMLSchema#long">238348732832</ТелефонСотрудника>
         <ФИО rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Шопок Оаклу Воалк</ФИО>
