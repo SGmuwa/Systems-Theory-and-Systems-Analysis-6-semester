@@ -13,9 +13,9 @@ namespace lab4
         //Области рассматриваются поочерёдно, пока не выпадет максимальная точка определённое количество раз подряд
         static readonly Random random = new Random();
         /// <summary>
-        /// Минимальное растояние между разведчиками.
+        /// Минимальное расстояние между разведчиками.
         /// </summary>
-        const double EVKLID_DISTANCE = 2;
+        const double EUCLIDEAN_DISTANCE = 2;
         /// <summary>
         /// Сколько раз одна и та же пчела в области являлась максимальной?
         /// Этот параметр задаёт ограничение на это количество.
@@ -26,11 +26,11 @@ namespace lab4
         // Про пчёл
 
         /// <summary>
-        /// Колличество пчёл разведчиков.
+        /// Количество пчёл разведчиков.
         /// </summary>
         private const int scoutCount = 10;
         /// <summary>
-        /// Колличество пчёл, отправляемых на лучшие участки.
+        /// Количество пчёл, отправляемых на лучшие участки.
         /// </summary>
         private const int beeCont_toBest = 5;
 
@@ -38,11 +38,11 @@ namespace lab4
         // Про области
 
         /// <summary>
-        /// Колличество лучших участков.
+        /// Количество лучших участков.
         /// </summary>
         private const int bestAreasCount = 2;
         /// <summary>
-        /// Колличество выбранных участков.
+        /// Количество выбранных участков.
         /// </summary>
         private const int selectedAreasCount = 3;
         /// <summary>
@@ -58,16 +58,16 @@ namespace lab4
         private const int StopY = 100;
 
         /// <summary>
-        /// Список предназначен для хранения истории найденых
+        /// Список предназначен для хранения истории найденных
         /// точек в области с максимальным значением функции.
         /// </summary>
-        private static List<Bee> TEM_CHEACK = new List<Bee>();
+        private static readonly List<Bee> HistoryMaximums = new List<Bee>();
         /// <summary>
         /// Сколько раз одна и та же пчела в области являлась максимальной?
         /// </summary>
         private static int tem_ch_count = 0;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             List<Bee> listBee = new List<Bee>(); // Точки разведчиков
             //Генерация случайных точек в области D, куда отправляются пчёлы - разведчики.
@@ -98,7 +98,7 @@ namespace lab4
             // Считаем евклидово расстояние между точками с наибольшим значением функции и другими точками
             for (int i = 0; i < listBestArea.Count; i++)
                 for (int j = 0; j < listOptionArea.Count; j++)
-                    if (listBestArea[i].Distance(listOptionArea[i].X, listOptionArea[i].Y) < EVKLID_DISTANCE && listOptionArea[j].PointCountBest == 0)
+                    if (listBestArea[i].Distance(listOptionArea[i].X, listOptionArea[i].Y) < EUCLIDEAN_DISTANCE && listOptionArea[j].PointCountBest == 0)
                     {
                         listBestArea[i].PointCountBest = listBestArea[i].PointCountBest + 1;
                         listOptionArea[j].PointCountBest = -1;
@@ -138,21 +138,21 @@ namespace lab4
                     };
                     int tempCountN;
                     if (i < bestAreasCount)
-                        // Колличество пчёл, посылаемых на лучшие участки
+                        // Количество пчёл, посылаемых на лучшие участки
                         tempCountN = beeCont_toBest + selectedAreasCount * listBee[i].PointCountBest;
                     else
-                        // Колличество пчёл, посылаемых на остальные участки
+                        // Количество пчёл, посылаемых на остальные участки
                         tempCountN = selectedAreasCount;
                     // Определяем верхнии и нижние координаты участка (границы области)
-                    int lower_coordX = centerX - areaSize;
-                    int upper_coordX = centerX + areaSize;
-                    int lower_coordY = centerY - areaSize;
-                    int upper_coordY = centerY + areaSize;
+                    int lowerX = centerX - areaSize;
+                    int upperX = centerX + areaSize;
+                    int lowerY = centerY - areaSize;
+                    int upperY = centerY + areaSize;
 
                     for (int j = 1; j < tempCountN + 1; j++)
-                    { // Генерируем точки в области в колличестве пчёл, посылыемых в область
-                        int x = random.Next(upper_coordX - lower_coordX + 1) + lower_coordX;
-                        int y = random.Next(upper_coordY - lower_coordY + 1) + lower_coordY;
+                    { // Генерируем точки в области в количестве пчёл, посылаемых в область
+                        int x = random.Next(upperX - lowerX + 1) + lowerX;
+                        int y = random.Next(upperY - lowerY + 1) + lowerY;
                         listN.Add(new Bee(x, y, 0));
                     }
 
@@ -161,8 +161,8 @@ namespace lab4
 
                     WriteList(listN);
                     bool ch = false;
-                    for (int j = 0; j < TEM_CHEACK.Count; j++)
-                        if (TEM_CHEACK[j].X == listN[0].X && TEM_CHEACK[j].Y == listN[0].Y)
+                    for (int j = 0; j < HistoryMaximums.Count; j++)
+                        if (HistoryMaximums[j].X == listN[0].X && HistoryMaximums[j].Y == listN[0].Y)
                         {
                             ch = true;
                             break;
@@ -171,7 +171,7 @@ namespace lab4
                         tem_ch_count++;
                     else
                         tem_ch_count = 0;
-                    TEM_CHEACK.Add(listN[0]);
+                    HistoryMaximums.Add(listN[0]);
                     centerX = listN[0].X;
                     centerY = listN[0].Y;
                     
@@ -180,7 +180,7 @@ namespace lab4
                     listN.Clear();
                 } while (tem_ch_count < break_parameter);
 
-                TEM_CHEACK.Clear();
+                HistoryMaximums.Clear();
                 tem_ch_count = 0;
             }
             

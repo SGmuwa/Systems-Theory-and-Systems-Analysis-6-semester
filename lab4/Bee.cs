@@ -41,7 +41,7 @@ namespace lab4
         public double AmountNectar { get; private set; }
         
         private double AmountNectarFunction(double X, double Y)
-            => -(Math.Pow(X, 2) + Math.Pow(Y, 2));
+            => -(Math.Pow(5+X, 4) + Math.Pow(1-Y, 4));
 
         /// <summary>
         /// Евклидово расстояние между точкой Y(x,y) и Y(a,b).
@@ -60,10 +60,10 @@ namespace lab4
 
         public int CompareTo(object obj)
         {
-            if (obj == null || !(obj is Bee))
+            if (obj == null || !(obj is Bee bee))
                 return 1;
             else
-                return CompareTo((Bee)obj);
+                return CompareTo(bee);
         }
 
         public override string ToString()
